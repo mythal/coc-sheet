@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './App.css';
 
-import logo from './logo.svg';
+import logo from '../logo.svg';
+import Sheet from "./Sheet";
 
 class App extends React.Component {
   public render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
         <p className="App-intro">
           Call of Cthulhu 7 Edition Character Sheet
         </p>
+        <Sheet/>
       </div>
     );
   }
