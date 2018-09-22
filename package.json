@@ -1,6 +1,15 @@
 {
   "name": "coc-sheet",
   "version": "0.1.0",
+  "description": "Call of Cthulhu 7 Edition Character Sheet",
+  "license": "GPL-3.0-only",
+  "author": "Quan Brew",
+  "homepage": "https://aleadea.github.io/coc-sheet/",
+  "repository": "aleadea/coc-sheet",
+  "scripts": {
+    "start": "parcel public/index.html",
+    "build": "NODE_ENV=production parcel build --public-url '.' public/index.html"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "immutable": "^3.8.2",
@@ -9,19 +18,14 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
   },
-  "scripts": {
-    "start": "parcel public/index.html",
-    "build": "NODE_ENV=production parcel build --public-url '.' public/index.html"
-  },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
-    "@types/jest": "^23.3.2",
     "@types/node": "^10.10.1",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
     "@types/react-redux": "^6.0.9",
     "parcel-bundler": "^1.9.7",
-    "typescript": "^3.0.3",
-    "tslint": "^5.11.0"
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
   }
 }
