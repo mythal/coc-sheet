@@ -2,7 +2,9 @@
   "name": "coc-sheet",
   "version": "0.1.0",
   "dependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/react-redux": "^6.0.9",
+    "classnames": "^2.2.6",
     "immutable": "^3.8.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
