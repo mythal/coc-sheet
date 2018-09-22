@@ -14,7 +14,7 @@ interface State {
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   // when user finished a input action.
-  onEdited?: (value: Value) => void;
+  onEdited?: (value: string) => void;
   delay?: boolean;
 }
 
