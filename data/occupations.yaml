@@ -1,0 +1,470 @@
+---
+- name: 会计师
+  credit: [30, 70]
+  skillPoint: EDU*4
+  skills: 会计，法律，图书馆，聆听，说服，侦查，任意其他两项个人或时代特长。
+  description: >
+
+- name: 杂技演员
+  credit: [9, 20]
+  skillPoint: EDU*2+DEX*2
+  skills: 攀爬，闪避，跳跃，投掷，侦查，游泳，任意两项其他个人或时代特长。
+
+- name: 演员-戏剧演员
+  credit: [9, 40]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（表演），乔装，格斗，历史，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意一项其他个人或时代特长。
+
+- name: 演员-电影演员
+  credit: [20, 90]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（表演），乔装，汽车驾驶，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意两项其他个人或时代特长（如骑乘或格斗）。
+
+- name: 中介调查员
+  credit: [20, 45]
+  skillPoint: EDU*2+STRorDEX*2
+  skills: 一项社交技能（魅惑、话术、恐吓、说服），格斗（斗殴），射击，法律，图书馆，心理学，潜行，追踪。
+
+- name: 精神病医生（古典）
+  credit: [10, 60]
+  skillPoint: EDU*4
+  skills: 法律，聆听，医学，外语，精神分析，心理学，科学（生物学，化学）。
+
+- name: 动物训练师
+  credit: [10, 40]
+  skillPoint: EDU*2+APPorPOW*2
+  skills: 跳跃，聆听，博物学，心理学，科学（动物学），潜行，追踪，任意一项其他个人或时代特长。
+
+- name: 文物学家（原作向）
+  credit: [30, 70]
+  skillPoint: EDU*4
+  skills: 估价，技艺（任一），历史，图书馆，外语，一项社交技能（魅惑、话术、恐吓、说服），侦查，任意一项其他个人或时代特长。
+  description: >
+    文物学家也许是调查员可以从事的最具有洛夫克拉夫特风格的职业：那些历久弥新的的卓越作品、湮没在古代传说中的神奇力量，
+    总能使他们乐在其中。独立的收入使文物学家能够研究古旧晦涩的文物，或者根据自己的兴趣爱好集中探寻特别的种类。他们通常
+    有着欣赏的眼光、敏锐的头脑，和讽刺无知、自大、贪婪者的愚蠢时尖酸刻薄的幽默。
+
+- name: 古董商
+  credit: [30, 50]
+  skillPoint: EDU*4
+  skills: 会计，估价，汽车驾驶，两项社交技能（魅惑、话术、恐吓、说服），历史，图书馆，导航。
+- name: 考古学家（原作向）
+  credit: [10, 40]
+  skillPoint: EDU*4
+  skills: 估价，考古，历史，外语，图书馆，侦查，机械维修，导航或科学（任一：如化学、物理、地理等）。
+- name: 建筑师
+  credit: [30, 70]
+  skillPoint: EDU*4
+  skills: 会计，技艺（技术制图），法律，母语，计算机或图书馆，说服，心理学，科学（数学）。
+- name: 艺术家
+  credit: [9, 50]
+  skillPoint: EDU*2+DEXorPOW*2
+  skills: 技艺（任一），历史或博物学，一项社交技能（魅惑、话术、恐吓、说服），外语，心理学，侦查，任意两项其他个人或时代特长。
+- name: 精神病院护工
+  credit: [8, 20]
+  skillPoint: EDU*2+STRorDEX*2
+  skills: 闪避，格斗（斗殴），急救，两项社交技能（魅惑、话术、恐吓、说服），聆听，心理学，潜行。
+- name: 运动员
+  credit: [9, 70]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，跳跃，格斗（斗殴），骑乘，一项社交技能（魅惑、话术、恐吓、说服），游泳，投掷，任意一项其他个人或时代特长。
+- name: 作家（原作向）
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 技艺（文学），历史，图书馆，博物学或神秘学，外语，母语，心理学，任意一项其他个人或时代特长。
+- name: 酒保
+  credit: [8, 25]
+  skillPoint: EDU*2+APP*2
+  skills: 会计，两项社交技能（魅惑、话术、恐吓、说服），格斗（斗殴），聆听，心理学，侦查，任意一项其他个人或时代特长。
+- name: 猎人
+  credit: [20, 50]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 射击，聆听或侦查，博物学，导航，外语或生存（任一），科学（生物学或植物学），潜行，追踪。
+- name: 书商
+  credit: [20, 40]
+  skillPoint: EDU*4
+  skills: 会计，估价，汽车驾驶，历史，图书馆，母语，外语，一项社交技能（魅惑、话术、恐吓、说服）。
+- name: 赏金猎人
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 汽车驾驶，电子学或电气维修，格斗或射击，一项社交技能（魅惑、话术、恐吓、说服），法律，心理学，追踪，潜行。
+- name: 拳击手、摔跤手
+  credit: [9, 60]
+  skillPoint: EDU*2+STR*2
+  skills: 闪避，格斗（斗殴），恐吓，跳跃，心理学，侦查，任意两项其他个人或时代特长。
+- name: 管家、男仆、女仆
+  credit: [9, 40]
+  skillPoint: EDU*4
+  skills: 会计或估价，技艺（任一：如烹饪、裁缝、理发），急救，聆听，外语，心理学，侦查，任意一项其他个人或时代特长。
+- name: 神职人员
+  credit: [9, 60]
+  skillPoint: EDU*4
+  skills: 会计，历史，图书馆，聆听，外语，一项社交技能（魅惑、话术、恐吓、说服），心理学，任意一项其他技能。
+- name: 程序员、电子工程师
+  credit: [10, 70]
+  skillPoint: EDU*4
+  skills: 计算机，电气维修，电子学、图书馆，科学（数学），侦查，任意两项其他个人或时代特长。
+- name: 黑客/骇客
+  credit: [10, 70]
+  skillPoint: EDU*4
+  skills: 计算机，电气维修，电子学，图书馆，侦查，一项社交技能（魅惑、话术、恐吓、说服），任意两项其他技能。
+- name: 牛仔
+  credit: [9, 20]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 闪避，格斗或射击，急救或博物学，跳跃，骑乘，生存（任一），投掷，追踪。
+- name: 工匠
+  credit: [10, 40]
+  skillPoint: EDU*2+DEX*2
+  skills: 会计，技艺（任二），机械维修，博物学，侦查，任意两项其他个人或时代特长。
+- name: 罪犯-刺客
+  credit: [30, 60]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 乔装，电气维修，格斗，射击，锁匠，机械维修，潜行，心理学。
+- name: 罪犯-银行劫匪
+  credit: [5, 75]
+  skillPoint: EDU*2+STRorDEX*2
+  skills: 汽车驾驶，电气维修或机械维修，格斗，射击，恐吓，锁匠，操作重型机械，任意一项其他个人或时代特长。
+- name: 罪犯-打手、暴徒
+  credit: [5, 30]
+  skillPoint: EDU*2+STR*2
+  skills: 汽车驾驶，格斗，射击，两项社交技能（魅惑、话术、恐吓、说服），心理学，潜行，侦查。
+- name: 罪犯-窃贼
+  credit: [5, 40]
+  skillPoint: EDU*2+DEX*2
+  skills: 估价，攀爬，电气维修或机械维修，聆听，锁匠，妙手，潜行，侦查。
+- name: 罪犯-欺诈师
+  credit: [10, 65]
+  skillPoint: EDU*2+APP*2
+  skills: 估价，技艺（表演），法律或外语，聆听，两项社交技能（魅惑、话术、恐吓、说服），心理学，妙手。
+- name: 罪犯-独行罪犯
+  credit: [5, 65]
+  skillPoint: EDU*2+DEXorAPP*2
+  skills: 技艺（表演）或乔装，估价，一项社交技能（魅惑、话术、恐吓、说服），格斗或射击，锁匠或机械维修，潜行，心理学，侦查。
+- name: 罪犯-女飞贼（古典）
+  credit: [10, 80]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（任意），两项社交技能（魅惑、话术、恐吓、说服），格斗（斗殴）或射击（手枪），汽车驾驶，聆听，潜行，任意一项其他个人或时代特长。
+- name: 罪犯-赃物贩子
+  credit: [20, 40]
+  skillPoint: EDU*2+APP*2
+  skills: 会计，估价，技艺（伪造），历史，一项社交技能（魅惑、话术、恐吓、说服），图书馆，侦查，任意一项其他技能。
+- name: 罪犯-赝造者
+  credit: [20, 60]
+  skillPoint: EDU*4
+  skills: 会计，估价，技艺（伪造），历史，图书馆，侦查，妙手，任意一项其他个人或时代特长（如计算机）。
+- name: 罪犯-走私者
+  credit: [20, 60]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 射击，聆听，导航，一项社交技能（魅惑、话术、恐吓、说服），汽车驾驶或驾驶（飞行器或船），心理学，妙手，侦查。
+- name: 罪犯-混混
+  credit: [3, 10]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，一项社交技能（魅惑、话术、恐吓、说服），格斗，射击，跳跃，妙手，潜行，投掷。
+- name: 教团首领
+  credit: [30, 60]
+  skillPoint: EDU*4
+  skills: 会计，两项社交技能（魅惑、话术、恐吓、说服），神秘学，心理学，侦查，任意其他两项其他个人特长。
+- name: 除魅师（现代）
+  credit: [20, 50]
+  skillPoint: EDU*4
+  skills: |
+    两项社交技能（魅惑、话术、恐吓、说服），汽车驾驶，格斗（斗殴）或射击，历史，神秘学，心理学，潜行。
+    ※经KP允许可用催眠替换其中一项。
+- name: 设计师
+  credit: [20, 60]
+  skillPoint: EDU*4
+  skills: 会计，技艺（摄影），技艺（任一），计算机或图书馆，机械维修，心理学，侦查，任意一项其他个人特长。
+- name: 业余艺术爱好者（原作向）
+  credit: [50, 99]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（任一），射击，外语，骑乘，一项社交技能（魅惑、话术、恐吓、说服），任意三项其他个人或时代特长。
+- name: 潜水员
+  credit: [9, 30]
+  skillPoint: EDU*2+DEX*2
+  skills: 潜水，急救，机械维修，驾驶（船），科学（生物），侦查，游泳，任意一项其他个人或时代特长。
+- name: 医生（原作向）
+  credit: [30, 80]
+  skillPoint: EDU*4
+  skills: 急救、医学、外语（拉丁文）、心理学、科学（生物学，制药），任两种其他学术或个人特长。
+- name: 流浪者
+  credit: [0, 5]
+  skillPoint: EDU*2+APPorDEXorSTR*2
+  skills: 攀爬，跳跃，聆听，导航，一项社交技能（魅惑、话术、恐吓、说服），潜行，任意两项其他个人或时代特长。
+- name: 司机-私人司机
+  credit: [10, 40]
+  skillPoint: EDU*2+DEX*2
+  skills: 汽车驾驶，两项社交技能（魅惑、话术、恐吓、说服），聆听，机械维修，导航，侦查，任意一项其他个人或时代特长。
+- name: 司机-司机
+  credit: [9, 20]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 会计，汽车驾驶，聆听，一项社交技能（魅惑、话术、恐吓、说服），机械维修，导航，心理学，任意一项其他个人或时代特长。
+- name: 司机-出租车司机
+  credit: [9, 30]
+  skillPoint: EDU*2+DEX*2
+  skills: 会计，汽车驾驶，电气维修，话术，机械维修，导航，侦查，任意一项其他个人或时代特长。
+- name: 编辑
+  credit: [10, 30]
+  skillPoint: EDU*4
+  skills: 会计，历史，母语，两项社交技能（魅惑、话术、恐吓、说服），心理学，侦查，任意一项其他个人或时代特长。
+- name: 政府官员
+  credit: [50, 90]
+  skillPoint: EDU*2+APP*2
+  skills: 魅惑，历史，恐吓，话术，聆听，母语，说服，心理学。
+- name: 工程师
+  credit: [30, 60]
+  skillPoint: EDU*4
+  skills: 技艺（技术制图），电气维修，图书馆，机械维修，操作重型机械，科学（工程学，物理），任意一项其他个人或时代特长。
+- name: 艺人
+  credit: [9, 70]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（表演类，如表演、演唱、喜剧等），乔装，两项社交技能（魅惑、话术、恐吓、说服），聆听，心理学，任意两项其他个人或时代特长。
+- name: 探险家（古典）
+  credit: [55, 80]
+  skillPoint: EDU*2+APPorDEXorSTR*2
+  skills: 攀爬或游泳，射击，历史，跳跃，博物学，导航，外语，生存。
+- name: 农民
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 技艺（耕作），汽车驾驶（或运货马车），一项社交技能（魅惑、话术、恐吓、说服），机械维修，博物学，操作重型机械，追踪，任意一项其他个人或时代特长
+- name: 司法人员
+  credit: [20, 40]
+  skillPoint: EDU*4
+  skills: 汽车驾驶，格斗（斗殴），射击，法律，说服，潜行，侦查，任意一项其他个人或时代特长。
+- name: 消防员
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，闪避，汽车驾驶，急救，跳跃，机械维修，操作重型机械，投掷。
+- name: 驻外记者
+  credit: [10, 40]
+  skillPoint: EDU*4
+  skills: 历史，外语，母语，聆听，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意一项其他个人或时代特长。
+- name: 法医
+  credit: [40, 60]
+  skillPoint: EDU*4
+  skills: 外语（拉丁文），图书馆，医学，说服，科学（生物学，鉴证，制药），侦查。
+- name: 赌徒
+  credit: [8, 50]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 会计，技艺（表演），两项社交技能（魅惑、话术、恐吓、说服），聆听，心理学，妙手，侦查。
+- name: 黑帮-黑帮老大
+  credit: [60, 95]
+  skillPoint: EDU*2+APP*2
+  skills: 格斗，射击，法律，聆听，两项社交技能（魅惑、话术、恐吓、说服），心理学，侦查。
+- name: 黑帮-马仔
+  credit: [9, 20]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 汽车驾驶，格斗，射击，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意两项其他个人或时代特长。
+- name: 绅士、淑女
+  credit: [40, 90]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（任一），两项社交技能（魅惑、话术、恐吓、说服），射击（步枪/霰弹枪），历史，外语（任一），导航，骑乘。
+- name: 游民
+  credit: [0, 5]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 技艺（任一），攀爬，跳跃，聆听，锁匠或妙手，导航，潜行，任意一项其他个人或时代特长。
+- name: 勤杂护工
+  credit: [6, 15]
+  skillPoint: EDU*2+STR*2
+  skills: 电气维修，一项社交技能（魅惑、话术、恐吓、说服），格斗（斗殴），急救，聆听，机械维修，心理学，潜行。
+- name: 记者(原作向)-调查记者
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 技艺（艺术或摄影），一项社交技能（魅惑、话术、恐吓、说服），历史，图书馆，母语，心理学，任意两项其他个人或时代特长。
+- name: 记者(原作向)-通讯记者
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 技艺（表演），历史，聆听，母语，一项社交技能（魅惑、话术、恐吓、说服），心理学，潜行，侦查。
+- name: 法官
+  credit: [50, 80]
+  skillPoint: EDU*4
+  skills: 历史，恐吓，法律，图书馆，聆听，母语，说服，心理学。
+- name: 实验室助理
+  credit: [10, 30]
+  skillPoint: EDU*4
+  skills: 计算机或图书馆，电气维修，外语，科学（化学和任意两项），侦查，任意一项其他个人特长。
+- name: 工人-伐木工
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，闪避，格斗（链锯），急救，跳跃，机械维修，博物学或科学（生物学或植物学），投掷。
+- name: 工人-矿工
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，科学（地质），跳跃，机械维修，操作重型机械，潜行，侦查，任意一项其他个人或时代特长。
+- name: 律师
+  credit: [30, 80]
+  skillPoint: EDU*4
+  skills: 会计，法律，图书馆，两项社交技能（魅惑、话术、恐吓、说服），心理学，两项其他技能。
+- name: 图书馆管理员（原作向）
+  credit: [9, 35]
+  skillPoint: EDU*4
+  skills: 会计，图书馆，外语，母语，任意四项其他个人特长或专业书籍主题。
+- name: 技师
+  credit: [9, 40]
+  skillPoint: EDU*4
+  skills: 技艺（木工、焊接、管道工等），攀爬，汽车驾驶，电气维修，机械维修，操作重型机械，任意两项其他个人或时代或技术特长。
+- name: 军官
+  credit: [20, 70]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 会计，射击，导航，急救，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意一项其他个人或时代特长。
+- name: 传教士
+  credit: [0, 30]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（任一），急救，机械维修，医学，博物学，一项社交技能（魅惑、话术、恐吓、说服），任意两项其他个人或时代特长。
+- name: 登山家
+  credit: [30, 60]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，急救，跳跃，聆听，导航，外语，生存（阿尔卑斯或类似），追踪。
+- name: 博物馆管理员
+  credit: [10, 30]
+  skillPoint: EDU*4
+  skills: 会计，估价，考古，历史，图书馆，神秘学，外语，侦查。
+- name: 音乐家
+  credit: [9, 30]
+  skillPoint: EDU*2+POWorDEX*2
+  skills: 技艺（乐器），一项社交技能（魅惑、话术、恐吓、说服），聆听，心理学，四项其他技能。
+- name: 护士
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 急救，聆听，医学，一项社交技能（魅惑、话术、恐吓、说服），心理学，科学（生物学，化学），侦查。
+- name: 神秘学家
+  credit: [9, 65]
+  skillPoint: EDU*4
+  skills: |
+    人类学，历史，图书馆，一项社交技能（魅惑、话术、恐吓、说服），神秘学，外语，科学（天文），任意一项其他个人或时代特长
+    ※经KP允许 可以包含克苏鲁神话
+- name: 旅行家
+  credit: [5, 20]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 射击，急救，聆听，博物学，导航，侦查，生存（任一），追踪。
+- name: 超心理学家
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 人类学，技艺（摄影），历史，图书馆，神秘学，外语，心理学，任意一项其他个人或时代特长。
+- name: 药剂师
+  credit: [35, 75]
+  skillPoint: EDU*4
+  skills: 会计，急救，外语（拉丁文），图书馆，一项社交技能（魅惑、话术、恐吓、说服），心理学，科学（制药，化学）。
+- name: 摄影师-摄影师
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 技艺（摄影），一项社交技能（魅惑、话术、恐吓、说服），心理学，科学（化学），潜行，侦查，任意两项其他个人或时代特长。
+- name: 摄影师-摄影记者
+  credit: [10, 30]
+  skillPoint: EDU*4
+  skills: 技艺（摄影），攀爬，一项社交技能（魅惑、话术、恐吓、说服），外语，心理学，科学（化学），任意两项其他个人或时代特长。
+- name: 飞行员-飞行员
+  credit: [20, 70]
+  skillPoint: EDU*2+DEX*2
+  skills: 电气维修，机械维修，导航，操作重型机械，驾驶（飞行器），科学（天文），任意两项其他个人或时代特长。
+- name: 飞行员-特技飞行员（古典）
+  credit: [30, 60]
+  skillPoint: EDU*4
+  skills: 会计，电气维修，聆听，机械维修，导航，驾驶（飞行器），侦查，任意一项其他个人或时代特长。
+- name: 警方(原作向)-警探
+  credit: [20, 50]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 技艺（表演）或乔装，射击，法律，聆听，一项社交技能（魅惑、话术、恐吓、说服），心理学，侦查，一项其他技能。
+- name: 警方(原作向)-巡警
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 格斗（斗殴），射击，急救，一项社交技能（魅惑、话术、恐吓、说服），法律，心理学，侦查和下面的一种个人特长：汽车驾驶或骑乘。
+- name: 私家侦探
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 技艺（摄影），乔装，法律，图书馆，一项社交技能（魅惑、话术、恐吓、说服），心理学，侦查，一项其他个人或时代特长（如计算机、锁匠、格斗、射击）。
+- name: 教授（原作向）
+  credit: [20, 70]
+  skillPoint: EDU*4
+  skills: 图书馆，外语，母语，心理学，任意四项其他学术、时代或个人特长。
+- name: 淘金客
+  credit: [0, 10]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬、急救、历史、机械维修、导航、科学（地质），侦查，任意一项其他个人或时代特长。
+- name: 性工作者
+  credit: [5, 50]
+  skillPoint: EDU*2+APP*2
+  skills: 技艺（任一），两项社交技能（魅惑、话术、恐吓、说服），闪避，心理学，妙手，潜行，任意一项其他个人或时代特长。
+- name: 精神病学家
+  credit: [30, 80]
+  skillPoint: EDU*4
+  skills: 外语，聆听，医学，说服，精神分析，心理学，科学（生物学，化学）。
+- name: 心理学家、精神分析学家
+  credit: [10, 40]
+  skillPoint: EDU*4
+  skills: 会计，图书馆，聆听，说服，精神分析，心理学，任意两项其他学术、个人或时代特长。
+- name: 研究员
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 历史，图书馆，一项社交技能（魅惑、话术、恐吓、说服），外语，侦查，任意三项其他学术领域。
+- name: 海员-军舰海员
+  credit: [9, 30]
+  skillPoint: EDU*4
+  skills: 电工或机械维修，格斗，射击，急救，导航，驾驶（船），生存（海上），游泳。
+- name: 海员-民船海员
+  credit: [20, 40]
+  skillPoint: EDU*4
+  skills: 急救，机械维修，博物学，导航，一项社交技能（魅惑、话术、恐吓、说服），驾驶（船），侦查，游泳。
+- name: 推销员
+  credit: [9, 40]
+  skillPoint: EDU*2+APP*2
+  skills: 会计，两项社交技能（魅惑、话术、恐吓、说服），汽车驾驶，聆听，心理学，潜行或妙手，一项其他技能。
+- name: 科学家
+  credit: [9, 50]
+  skillPoint: EDU*4
+  skills: 任意三项科学专业领域，计算机或图书馆，外语，母语，一项社交技能（魅惑、话术、恐吓、说服），侦查。
+- name: 秘书
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorAPP*2
+  skills: 会计，技艺（打字或速记），两项社交技能（魅惑、话术、恐吓、说服），母语，图书馆或计算机，心理学，任意一项其他个人或时代特长。
+- name: 店老板
+  credit: [20, 40]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 会计，两项社交技能（魅惑、话术、恐吓、说服），电气维修，聆听，机械维修，心理学，侦查。
+- name: 士兵、海军陆战队士兵
+  credit: [9, 30]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬或游泳，闪避，格斗，射击，潜行，生存，下面任选两项：急救、机械维修、外语。
+- name: 间谍
+  credit: [20, 60]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 技艺（表演）或乔装，射击，聆听，外语，一项社交技能（魅惑、话术、恐吓、说服），心理学，妙手，潜行。
+- name: 学生、实习生
+  credit: [5, 10]
+  skillPoint: EDU*4
+  skills: 语言（母语或外语），图书馆，聆听，三个学习的专业，任意两项其他个人或时代特长。
+- name: 替身演员
+  credit: [10, 50]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，闪避，电气维修或机械维修，格斗，急救，跳跃，游泳，下面任选一项：潜水、汽车驾驶、驾驶（任一），骑乘。
+- name: 部落成员
+  credit: [0, 15]
+  skillPoint: EDU*2+DEXorSTR*2
+  skills: 攀爬，格斗或投掷，聆听，博物学，神秘学，侦查，游泳，生存（任一）。
+- name: 殡葬师
+  credit: [20, 40]
+  skillPoint: EDU*4
+  skills: 会计，汽车驾驶，一项社交技能（魅惑、话术、恐吓、说服），历史，神秘学，心理学，科学（生物学，化学）。
+- name: 工会活动家
+  credit: [5, 50]
+  skillPoint: EDU*4
+  skills: 会计，两项社交技能（魅惑、话术、恐吓、说服），格斗（斗殴），法律，聆听，操作重型机械，心理学。
+- name: 服务生
+  credit: [9, 20]
+  skillPoint: EDU*2+APPorDEX*2
+  skills: 会计，技艺（任一），闪避，聆听，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意一项其他个人或时代特长。
+- name: 白领工人-职员、主管
+  credit: [9, 20]
+  skillPoint: EDU*4
+  skills: 会计，语言，法律，图书馆或计算机，聆听，一项社交技能（魅惑、话术、恐吓、说服），任意两项其他个人或时代特长。
+- name: 白领工人-中高层管理人员
+  credit: [20, 80]
+  skillPoint: EDU*4
+  skills: 会计，外语，法律，两项社交技能（魅惑、话术、恐吓、说服），心理学，任意两项其他个人或时代特长。
+- name: 狂热者
+  credit: [0, 30]
+  skillPoint: EDU*2+APPorPOW*2
+  skills: 历史，两项社交技能（魅惑、话术、恐吓、说服），心理学，潜行，任意三项其他个人或时代特长。
+- name: 饲养员
+  credit: [9, 40]
+  skillPoint: EDU*4
+  skills: 驯兽，会计，闪避，急救，博物学，医学，科学（制药，动物学）。
