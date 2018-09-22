@@ -10,7 +10,8 @@
     "redux": "^4.0.0"
   },
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel public/index.html",
+    "build": "NODE_ENV=production parcel build --public-url '.' public/index.html"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
