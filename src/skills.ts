@@ -9,4 +9,4 @@ export interface Skill {
   tag?: Array<string>;
 }
 
-export const skills = skillData as Skill;
+export const skills = skillData as Array<Skill>;
