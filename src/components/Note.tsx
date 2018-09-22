@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {SheetState} from "../types";
 import * as actions from '../actions';
 import {Dispatch} from "redux";
+import {Input} from "./controls/Input";
 
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 
 const Note = ({value, onChange}: Props) => {
   return (
-    <input value={value} onChange={e => onChange(e.currentTarget.value)}/>
+    <Input value={value} onEdited={onChange} delay/>
   );
 };
 
