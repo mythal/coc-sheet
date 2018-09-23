@@ -1,4 +1,4 @@
-import { attributeNames, Attributes } from "./attributes";
+import { characteristics, Characteristics } from "./attributes";
 
 
 const eatNumber = (text: string): [number, string] | null => {
@@ -28,8 +28,8 @@ const eatAdd = eatString('+');
 
 const eatEmpty = (text: string) => text.trimLeft();
 
-function eatAttr(text: string): [keyof Attributes, string] | null {
-  for (let attr of attributeNames) {
+function eatAttr(text: string): [keyof Characteristics, string] | null {
+  for (let attr of characteristics) {
     if (text.startsWith(attr.toUpperCase())) {
       return [attr, text.substring(attr.length)];
     }
@@ -38,7 +38,7 @@ function eatAttr(text: string): [keyof Attributes, string] | null {
 }
 
 
-export function computeSkillPoint(attributes: Attributes, pattern: string): number {
+export function computeSkillPoint(attributes: Partial<Characteristics>, pattern: string): number | null {
   const ERROR = -1;
   let sum = 0;
   let current = 0;
@@ -52,6 +52,7 @@ export function computeSkillPoint(attributes: Attributes, pattern: string): numb
       if (attrResult === null) return ERROR;
       const [attr, attrRest] = attrResult;
       const attrValue = attributes[attr];
+      if (attrValue === undefined) return null;
       current = Math.max(current, attrValue);
       rest = attrRest;
       continue
@@ -81,7 +82,9 @@ export function computeSkillPoint(attributes: Attributes, pattern: string): numb
     if (attrResult !== null) {
       const [attr, attrRest] = attrResult;
       rest = attrRest;
-      current = attributes[attr];
+      const attrValue = attributes[attr];
+      if (attrValue === undefined) return null;
+      current = attrValue;
     }
 
     rest = eatEmpty(rest);

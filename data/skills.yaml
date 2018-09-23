@@ -1,8 +1,7 @@
 ---
 - label: 闪避
   name: Dodge
-  # initial value of Dodge equals DEX/2
-  initial: 0
+  initial: DEX/2
 - label: 心理学
   name: Psychology
   initial: 10
@@ -329,8 +328,7 @@
     initial: 1
 - label: 母语
   name: Language (Own)
-  # initial value of Own Language equals EDU
-  initial: 0
+  initial: EDU
   tag:
   - blank
   contains: *languages
