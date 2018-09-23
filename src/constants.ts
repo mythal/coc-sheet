@@ -8,7 +8,10 @@ export const RESET = 'RESET';
 export const CHANGE_ERA = 'CHANGE_ARE';
 export const CUSTOM_ERA = 'CUSTOM_ERA';
 export const ROLL = 'ROLL';
-export const INPUT_DELAY = 700;
+export const INPUT_DELAY = 600;
+
+// Information
+export const EDIT_INFORMATION = 'EDIT_INFORMATION';
 
 // Attribute
 export const AUTO_ATTRIBUTE = 'AUTO_ATTRIBUTE';

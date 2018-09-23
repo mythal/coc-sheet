@@ -1,13 +1,16 @@
-import { SheetState } from "../types";
-import { connect } from "react-redux";
+import * as React from 'react';
+import Note from './Note';
+import InformationForm from './InformationForm';
 
 
 const Sheet = () => {
-  return null;
+  return (
+    <div>
+      <InformationForm />
+      <Note />
+    </div>
+  );
 };
 
 
-const mapStateToProps = ({ note }: SheetState) => ({ name: note });
-
-
-export default connect(mapStateToProps)(Sheet);
+export default Sheet;

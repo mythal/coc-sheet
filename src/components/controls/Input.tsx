@@ -48,6 +48,7 @@ export class Input extends React.Component<Props, State> {
   render() {
     const props = { ...this.props, value: this.state.value };
     props.onChange = this.onChange;
+    if (!props.margin) props.margin = 'normal';
     delete props.onEdited;
     return (<TextField {...props} />);
   }

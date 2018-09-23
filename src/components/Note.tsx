@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { connect } from "react-redux";
-import { SheetState } from "../types";
+import { connect } from 'react-redux';
+import { Sheet } from '../types';
 import * as actions from '../actions';
-import { Dispatch } from "redux";
+import { Dispatch } from 'redux';
+import { Input } from './controls/Input'
 
 
 interface Props {
@@ -13,12 +14,12 @@ interface Props {
 
 const Note = ({ value, onChange }: Props) => {
   return (
-    <textarea value={value} onChange={e => onChange(e.currentTarget.value)} />
+    <Input label='调查员笔记' value={value} onEdited={onChange} multiline />
   );
 };
 
 
-const mapStateToProps = ({ note }: SheetState) => ({ value: note });
+const mapStateToProps = ({ note }: Sheet) => ({ value: note });
 
 
 const mapDispatchToProps = (dispatch: Dispatch): Partial<Props> => {
