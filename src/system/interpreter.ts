@@ -1,13 +1,30 @@
 import { attributeNames, Attributes } from "./attributes";
 
-const eatOr = (text: string) => (text.startsWith('or') ? text.substring(2) : null);
 
-const eatDigit = (text: string): [number, string] | null =>
-  (/^\d/.test(text) ? [parseInt(text[0]), text.substring(1)] : null);
+const eatNumber = (text: string): [number, string] | null => {
+  const numberPattern = /^\d/;
+  const result = numberPattern.exec(text);
+  if (result === null) return null;
+  else {
+    const number = result[0];
+    return [parseInt(number), text.substring(number.length)];
+  }
+};
 
-const eatMul = (text: string) => (text.startsWith('*') ? text.substring(1) : null);
 
-const eatAdd = (text: string) => (text.startsWith('+') ? text.substring(1) : null);
+const eatString = (str: string) => (input: string) =>
+  (input.startsWith(str) ? input.substring(str.length) : null);
+
+
+const eatOr = eatString('or');
+
+const eatMul = eatString('*');
+
+const eatAdd = eatString('+');
+
+// const eatSub = eatString('-');
+//
+// const eatDiv = eatString('-');
 
 const eatEmpty = (text: string) => text.trimLeft();
 
@@ -52,7 +69,7 @@ export function computeSkillPoint(attributes: Attributes, pattern: string): numb
     const mulResult = eatMul(rest);
     if (mulResult !== null) {
       rest = mulResult;
-      const digitResult = eatDigit(eatEmpty(rest));
+      const digitResult = eatNumber(eatEmpty(rest));
       if (digitResult === null) return ERROR;
       const [n, digitRest] = digitResult;
       rest = digitRest;
