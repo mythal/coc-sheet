@@ -1,4 +1,9 @@
 declare module '*.yaml' {
-  const value: any;
-  export default value;
+  const data: any;
+  export default data;
+}
+
+declare module '*.json' {
+  const data: any;
+  export default data;
 }

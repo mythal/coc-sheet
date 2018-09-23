@@ -8,12 +8,12 @@ interface Props {
   name: string;
 }
 
-const Sheet = ({name}: Props) => {
-  return (<div><p>Hello, {name}</p><Note/></div>);
+const Sheet = ({ name }: Props) => {
+  return (<div><p>Hello, {name}</p><Note /></div>);
 };
 
 
-const mapStateToProps = ({note}: SheetState) => ({name: note});
+const mapStateToProps = ({ note }: SheetState) => ({ name: note });
 
 
 export default connect(mapStateToProps)(Sheet);

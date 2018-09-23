@@ -12,18 +12,18 @@ interface Props {
 }
 
 
-const Note = ({value, onChange}: Props) => {
+const Note = ({ value, onChange }: Props) => {
   return (
-    <Input value={value} onEdited={onChange} delay/>
+    <Input value={value} onEdited={onChange} delay />
   );
 };
 
 
-const mapStateToProps = ({note}: SheetState) => ({value: note});
+const mapStateToProps = ({ note }: SheetState) => ({ value: note });
 
 
 const mapDispatchToProps = (dispatch: Dispatch): Partial<Props> => {
-  return ({onChange: (text: string) => dispatch(actions.editNote(text))});
+  return ({ onChange: (text: string) => dispatch(actions.editNote(text)) });
 };
 
 

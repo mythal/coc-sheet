@@ -37,13 +37,13 @@ export class Number extends React.Component<Props, State> {
           onEdited(min);
         }
       }
-      if (text === '') this.setState({cleared: true});
+      if (text === '') this.setState({ cleared: true });
     }
   };
 
   constructor(props: Props) {
     super(props);
-    this.state = {cleared: false}
+    this.state = { cleared: false }
   }
 
   render() {
@@ -52,9 +52,9 @@ export class Number extends React.Component<Props, State> {
 
     return (
       <Input type="number" value={this.value()}
-             id={this.props.id} className={className}
-             disabled={disable} delay={true}
-             onEdited={value => this.update(String(value))}/>
+        id={this.props.id} className={className}
+        disabled={disable} delay={true}
+        onEdited={value => this.update(String(value))} />
     );
   }
 

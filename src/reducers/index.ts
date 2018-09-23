@@ -12,4 +12,4 @@ function note(note: string = "", action: EditNote) {
 }
 
 
-export const sheet = combineReducers<SheetState>({note});
+export const sheet = combineReducers<SheetState>({ note });

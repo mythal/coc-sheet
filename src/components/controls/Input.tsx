@@ -31,21 +31,21 @@ export class Input extends React.Component<Props, State> {
     const timer = setTimeout(() => {
       if (onEdited !== undefined) {
         onEdited(value);
-        this.setState({value: this.props.value, typing: false});
+        this.setState({ value: this.props.value, typing: false });
       }
     }, INPUT_DELAY);
 
     if (onChange !== undefined) onChange(e);
-    this.setState({value: value, typing: true, typingTimeout: timer});
+    this.setState({ value: value, typing: true, typingTimeout: timer });
   };
 
   constructor(props: Props) {
     super(props);
-    this.state = {value: this.props.value, typing: false}
+    this.state = { value: this.props.value, typing: false }
   }
 
   render() {
-    const props = {...this.props, value: this.state.value};
+    const props = { ...this.props, value: this.state.value };
     if (props.delay === true) {
       props.onChange = this.onChange;
     }

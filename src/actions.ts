@@ -8,5 +8,5 @@ export interface EditNote {
 
 
 export function editNote(note: string): EditNote {
-  return {type: constants.EDIT_NOTE, note}
+  return { type: constants.EDIT_NOTE, note }
 }

@@ -1,5 +1,5 @@
-import occupationData from '../data/occupations.yaml';
-import {attributeNames, Attributes} from "./types/attributes";
+import occupationData from '../../data/occupations.json';
+import {attributeNames, Attributes} from "../types/attributes";
 
 export interface Occupation {
   name: string;
@@ -14,7 +14,8 @@ namespace Parser {
 
   const eatOr = (text: string) => (text.startsWith('or') ? text.substring(2) : null);
 
-  const eatDigit = (text: string): [number, string] | null => (/^\d/.test(text) ? [parseInt(text[0]), text.substring(1)] : null);
+  const eatDigit = (text: string): [number, string] | null =>
+    (/^\d/.test(text) ? [parseInt(text[0]), text.substring(1)] : null);
 
   const eatMul = (text: string) => (text.startsWith('*') ? text.substring(1) : null);
 
@@ -83,5 +84,6 @@ namespace Parser {
 export const occupations = occupationData as Array<Occupation>;
 
 
-export const occupationsSkillPoints = (attributes: Attributes) =>
-  occupations.map(o => Parser.computeSkillPoint(attributes, o.skillPoint));
+export const occupationsSkillPoints = (attributes: Attributes) => {
+  return occupations.map(o => Parser.computeSkillPoint(attributes, o.skillPoint));
+};

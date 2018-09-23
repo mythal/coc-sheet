@@ -18,9 +18,9 @@ class App extends React.Component {
         </p>
         <div>
           <strong>Test controls</strong>
-          <div><Number/></div>
+          <div><Number /></div>
         </div>
-        <Sheet/>
+        <Sheet />
       </div>
     );
   }

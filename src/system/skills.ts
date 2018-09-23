@@ -1,4 +1,4 @@
-import skillData from '../data/skills.yaml';
+import skillData from '../../data/skills.json';
 
 
 export interface Skill {
