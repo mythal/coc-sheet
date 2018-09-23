@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Input } from "./Input";
+import { Input } from './Input';
 
 interface Props {
   value?: number;
@@ -41,7 +41,7 @@ export class Number extends React.Component<Props, State> {
     const disable = this.props.disable === true;
 
     return (
-      <Input type="number" value={this.value()}
+      <Input type='number' value={this.value()}
         id={this.props.id} className={className}
         disabled={disable} label={this.props.label}
         onEdited={value => this.update(value)} />
@@ -51,7 +51,7 @@ export class Number extends React.Component<Props, State> {
   private value(): string {
     const value = this.props.value;
     const cleared = this.state.cleared;
-    // user can remove all number, don't remain "0".
+    // user can remove all number, don't remain '0'.
     return value === undefined || (value === 0 && cleared) ? '' : value.toFixed();
   }
 }

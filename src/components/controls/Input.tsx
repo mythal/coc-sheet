@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
-import { INPUT_DELAY } from "../../constants";
+import { INPUT_DELAY } from '../../constants';
 import Timer = NodeJS.Timer;
-import { TextField } from "@material-ui/core";
-import { TextFieldProps } from "@material-ui/core/TextField";
+import { TextField } from '@material-ui/core';
+import { TextFieldProps } from '@material-ui/core/TextField';
 
 
 interface State {

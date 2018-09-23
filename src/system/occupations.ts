@@ -1,6 +1,6 @@
 import occupationData from '../../data/occupations.json';
-import { Attributes } from "./attributes";
-import { computeSkillPoint } from "./interpreter";
+import { Attributes } from './attributes';
+import { computeSkillPoint } from './interpreter';
 
 export interface Occupation {
   name: string;

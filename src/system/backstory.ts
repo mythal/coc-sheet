@@ -1,4 +1,4 @@
-import { choice } from "./roll";
+import { choice } from './roll';
 
 
 export interface Backstory {
@@ -12,16 +12,16 @@ export interface Backstory {
 
 
 export const backStoryHint: { [type: string]: (type: string) => string } = {
-  "personalDescription": () => {
+  'personalDescription': () => {
     const blood_types = choice(['A', 'B', 'AB', 'O']);
-    const mbti = [['E', 'I'], ['S', 'N'], ['T', 'F'], ['J', 'P']].map(choice).join("");
+    const mbti = [['E', 'I'], ['S', 'N'], ['T', 'F'], ['J', 'P']].map(choice).join('');
     const constellation = choice([
       '摩羯', '水瓶', '双鱼', '白羊', '金牛', '双子',
       '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手'
     ]);
     return `${blood_types}型血 / MBTI人格类型：${mbti} / ${constellation}座`;
   },
-  "ideologyOrBeliefs": () => choice([
+  'ideologyOrBeliefs': () => choice([
     '你信仰并祈并一位大能。(例如毗沙门天、耶稣基督、海尔·塞拉西一世)',
     '人类无需上帝。(例如坚定的无神论者，人文主义者，世俗主义者)',
     '科学万能!科学万岁!你将选择其中之一。(例如进化论，低温学，太空探索)',
@@ -32,7 +32,7 @@ export const backStoryHint: { [type: string]: (type: string) => string } = {
     '键盘政治局委员。(例如保守党，共产党，自由党)',
     '“金钱就是力量，我的朋友，我将竭尽全力获取我能看到的一切。”(例如贪婪心，进取心，冷酷心)',
   ]),
-  "significantPeople": () => {
+  'significantPeople': () => {
     const who = [
       '你的父辈。(例如母亲，父亲，继母)',
       '你的祖父辈。(例如外祖母、祖父)',
@@ -59,7 +59,7 @@ export const backStoryHint: { [type: string]: (type: string) => string } = {
     ];
     return `${choice(who)} 因为${choice(why)}`;
   },
-  "meaningfulLocations": () => choice([
+  'meaningfulLocations': () => choice([
     '你最爱的学府。(例如，中学，大学)',
     '你的故乡。(例如，乡下老家，小镇村，大都市)',
     '相识初恋之处。(例如，音乐会，度假村，核弹避难所)',
@@ -71,7 +71,7 @@ export const backStoryHint: { [type: string]: (type: string) => string } = {
     '生命中最高兴时的所在。(例如，初吻时坐着的公园长椅，你的大学)',
     '工作地点。(例如，办公室，图书馆，银行)',
   ]),
-  "treasuredPossessions": () => choice([
+  'treasuredPossessions': () => choice([
     '与你得意技相关之物。(例如华服，假身份证，青铜指虎)',
     '职业必需品。(例如医疗包，汽车，撬锁器)',
     '童年的遗留物。(例如漫画书，随身小刀，幸运币)',
@@ -83,7 +83,7 @@ export const backStoryHint: { [type: string]: (type: string) => string } = {
     '武器。(例如，半自动左轮，老旧的猎用来福，靴刃)',
     '宠物。(例如狗，猫，乌龟)',
   ]),
-  "traits": () => choice([
+  'traits': () => choice([
     '慷慨大方。(例如，小费大手，及时雨，慈善家)',
     '善待动物。(例如，爱猫人士，农场出生，与小马同舞)',
     '梦想家。(例如，惯常异想天开，预言家，创造者)',

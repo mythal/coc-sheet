@@ -1,4 +1,4 @@
-import { characteristics, Characteristics } from "./attributes";
+import { characteristics, Characteristics } from './attributes';
 
 
 const eatNumber = (text: string): [number, string] | null => {
@@ -44,7 +44,7 @@ export function computeSkillPoint(attributes: Partial<Characteristics>, pattern:
   let current = 0;
   let factor = 1;
   let rest = pattern;
-  while (rest !== "") {
+  while (rest !== '') {
     const orResult = eatOr(rest);
     if (orResult !== null) {
       rest = orResult;

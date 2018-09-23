@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from "../utils";
+import { randomIntFromInterval } from '../utils';
 
 export const r = (n: number, face: number) =>
   roll(n, face).reduce((a, b) => a + b, 0);

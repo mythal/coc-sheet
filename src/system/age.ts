@@ -1,11 +1,11 @@
-import { randomIntFromInterval } from "../utils";
+import { randomIntFromInterval } from '../utils';
 
-export interface OutRange { type: "OutRange" }
+export interface OutRange { type: 'OutRange' }
 
-export interface Young { type: "Young" }
+export interface Young { type: 'Young' }
 
 export interface Normal {
-  type: "Normal";
+  type: 'Normal';
   eduEnhance: number;
   multiDeduct: number;
   appDeduct: number;
@@ -19,10 +19,10 @@ export function randomAge(): number {
 }
 
 export function ageAffect(age: number): Normal | Young | OutRange {
-  if (age < 15 || age > 90) return { type: "OutRange" };
-  else if (age < 20) return { type: "Young" };
+  if (age < 15 || age > 90) return { type: 'OutRange' };
+  else if (age < 20) return { type: 'Young' };
   let affect: Normal = {
-    type: "Normal",
+    type: 'Normal',
     eduEnhance: 0,
     multiDeduct: 0,
     appDeduct: 0
@@ -63,13 +63,13 @@ export function ageAffect(age: number): Normal | Young | OutRange {
 
 export function ageHint(age: number) {
   const affect = ageAffect(age);
-  if (affect.type === "OutRange") {
+  if (affect.type === 'OutRange') {
     return '超出可选范围，请与守密人协商。';
   }
-  else if (affect.type === "Young") {
+  else if (affect.type === 'Young') {
     return '力量和体型合计减 5 点。教育减 5 点。 决定幸运值时可以骰 2 次并取较好的一次。';
   }
-  else if (affect.type === "Normal") {
+  else if (affect.type === 'Normal') {
     let hint = '';
     if (affect.eduEnhance !== 0) hint += `对教育进行 ${affect.eduEnhance} 次增强检定。`;
     if (affect.multiDeduct !== 0) hint += `力量体质敏捷合计减 ${affect.multiDeduct}。`;
