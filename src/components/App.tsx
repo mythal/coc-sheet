@@ -3,7 +3,7 @@ import './App.css';
 
 import logo from '../logo.svg';
 import Sheet from "./Sheet";
-import {Number} from "./controls/Number";
+import { Number } from "./controls/Number";
 
 class App extends React.Component {
   public render() {

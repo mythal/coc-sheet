@@ -1,8 +1,13 @@
-import {occupationsSkillPoints} from "./occupations";
-import {r} from "./roll";
+import { computeSkillPoint } from "./interpreter";
+import { r } from "./roll";
 
 it('compute skill point', () => {
-  const result = occupationsSkillPoints({
+  const result = [
+    "EDU * 4",
+    "EDU * 2 + DEX * 2",
+    "EDU * 2 + STRorDEX * 2",
+    "EDU * 2 + APPorDEXorSTR * 2",
+  ].map(ptn => computeSkillPoint({
     str: 5 * r(3, 6),
     con: 5 * r(3, 6),
     siz: 5 * (r(2, 6) + 6),
@@ -11,6 +16,6 @@ it('compute skill point', () => {
     int: 5 * (r(2, 6) + 6),
     pow: 5 * r(3, 6),
     edu: 5 * (r(2, 6) + 6),
-  }).filter(x => x < 50);
+  }, ptn)).filter(x => x < 50);
   expect(result).toEqual([]);
 });

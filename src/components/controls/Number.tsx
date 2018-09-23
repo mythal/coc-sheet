@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Input} from "./Input";
-import {isNumeric} from "../../utils";
+import { Input } from "./Input";
+import { isNumeric } from "../../utils";
 
 interface Props {
   value?: number;

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {connect} from "react-redux";
-import {SheetState} from "../types";
+import { connect } from "react-redux";
+import { SheetState } from "../types";
 import * as actions from '../actions';
-import {Dispatch} from "redux";
-import {Input} from "./controls/Input";
+import { Dispatch } from "redux";
+import { Input } from "./controls/Input";
 
 
 interface Props {

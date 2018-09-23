@@ -10,4 +10,6 @@ export interface Attributes {
 }
 
 
-export const attributeNames: Array<keyof Attributes> = ["str", "con", "siz", "dex", "app", "int", "pow", "edu"];
+export const attributeNames: Array<keyof Attributes> = [
+  "str", "con", "siz", "dex", "app", "int", "pow", "edu"
+];

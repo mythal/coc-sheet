@@ -1,5 +1,5 @@
 import occupationData from '../../data/occupations.json';
-import {attributeNames, Attributes} from "../types/attributes";
+import { attributeNames, Attributes } from "./attributes";
 
 export interface Occupation {
   name: string;

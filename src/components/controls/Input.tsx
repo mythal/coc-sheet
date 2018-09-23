@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {ChangeEvent} from 'react';
-import {INPUT_DELAY} from "../../constants";
+import { ChangeEvent } from 'react';
+import { INPUT_DELAY } from "../../constants";
 import Timer = NodeJS.Timer;
 
 type Value = string | string[] | number;

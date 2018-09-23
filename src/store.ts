@@ -1,5 +1,5 @@
-import {createStore} from "redux";
-import {sheet} from "./reducers";
+import { createStore } from "redux";
+import { sheet } from "./reducers";
 
 export const store = createStore(
   sheet,
