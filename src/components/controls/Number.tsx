@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Input } from "./Input";
-import { isNumeric } from "../../utils";
 
 interface Props {
   value?: number;
   id?: string;
   className?: string;
   disable?: boolean;
-  max?: number;
-  min?: number;
+  label?: string;
   onEdited?: (x: number) => void;
 }
 
@@ -21,24 +19,16 @@ export class Number extends React.Component<Props, State> {
     // can't handle 'e'
     // https://github.com/facebook/react/issues/6556
     const onEdited = this.props.onEdited;
-    const max = this.props.max ? this.props.max : 1e21 - 1;
-    const min = this.props.min ? this.props.min : 0;
-    const editable = this.props.disable !== true;
-    const number = parseInt(text);
-    if (isNumeric(text) && !isNaN(number) && editable) {
-      if (onEdited) {
-        if (number >= min && number <= max) {
-          onEdited(number);
-        }
-        else if (number > max) {
-          onEdited(max);
-        }
-        else if (number < min) {
-          onEdited(min);
-        }
-      }
-      if (text === '') this.setState({ cleared: true });
+    if (onEdited === undefined || this.props.disable === true) return;
+
+    if (text === '') {
+      onEdited(0);
+      this.setState({ cleared: true });
+      return;
     }
+
+    const number = parseInt(text);
+    if (!isNaN(number)) { onEdited(number) }
   };
 
   constructor(props: Props) {
@@ -53,16 +43,16 @@ export class Number extends React.Component<Props, State> {
     return (
       <Input type="number" value={this.value()}
         id={this.props.id} className={className}
-        disabled={disable} delay={true}
-        onEdited={value => this.update(String(value))} />
+        disabled={disable} label={this.props.label}
+        onEdited={value => this.update(value)} />
     );
   }
 
-  private value(): string | number {
+  private value(): string {
     const value = this.props.value;
     const cleared = this.state.cleared;
     // user can remove all number, don't remain "0".
-    return value === undefined || (value === 0 && cleared) ? '' : value;
+    return value === undefined || (value === 0 && cleared) ? '' : value.toFixed();
   }
 }
 

@@ -2,20 +2,21 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { INPUT_DELAY } from "../../constants";
 import Timer = NodeJS.Timer;
+import { TextField } from "@material-ui/core";
+import { TextFieldProps } from "@material-ui/core/TextField";
 
-type Value = string | string[] | number;
 
 interface State {
-  value?: Value;
+  value?: string;
   typing: boolean;
   typingTimeout?: Timer;
 }
 
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface Props extends TextFieldProps {
   // when user finished a input action.
   onEdited?: (value: string) => void;
-  delay?: boolean;
+  value?: string;
 }
 
 
@@ -46,11 +47,8 @@ export class Input extends React.Component<Props, State> {
 
   render() {
     const props = { ...this.props, value: this.state.value };
-    if (props.delay === true) {
-      props.onChange = this.onChange;
-    }
+    props.onChange = this.onChange;
     delete props.onEdited;
-    delete props.delay;
-    return (<input {...props} />);
+    return (<TextField {...props} />);
   }
 }
