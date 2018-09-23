@@ -10,7 +10,7 @@
     "start": "yarn before && parcel public/index.html",
     "build": "yarn before && NODE_ENV=production parcel build --public-url '.' public/index.html",
     "format": "tsfmt -r",
-    "test": "jest",
+    "test": "yarn before && jest",
     "before": "yarn yaml",
     "yaml": "yaml2json -rsp data/"
   },

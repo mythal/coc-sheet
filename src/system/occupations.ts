@@ -21,6 +21,8 @@ namespace Parser {
 
   const eatAdd = (text: string) => (text.startsWith('+') ? text.substring(1) : null);
 
+  const eatEmpty = (text: string) => text.trimLeft();
+
   function eatAttr(text: string): [keyof Attributes, string] | null {
     for (let attr of attributeNames) {
       if (text.startsWith(attr.toUpperCase())) {
@@ -41,7 +43,7 @@ namespace Parser {
       const orResult = eatOr(rest);
       if (orResult !== null) {
         rest = orResult;
-        const attrResult = eatAttr(rest);
+        const attrResult = eatAttr(eatEmpty(rest));
         if (attrResult === null) return ERROR;
         const [attr, attrRest] = attrResult;
         const attrValue = attributes[attr];
@@ -62,7 +64,7 @@ namespace Parser {
       const mulResult = eatMul(rest);
       if (mulResult !== null) {
         rest = mulResult;
-        const digitResult = eatDigit(rest);
+        const digitResult = eatDigit(eatEmpty(rest));
         if (digitResult === null) return ERROR;
         const [n, digitRest] = digitResult;
         rest = digitRest;
@@ -71,10 +73,13 @@ namespace Parser {
       }
 
       const attrResult = eatAttr(rest);
-      if (attrResult === null) return ERROR;
-      const [attr, attrRest] = attrResult;
-      rest = attrRest;
-      current = attributes[attr];
+      if (attrResult !== null) {
+        const [attr, attrRest] = attrResult;
+        rest = attrRest;
+        current = attributes[attr];
+      }
+
+      rest = eatEmpty(rest);
     }
     sum += current * factor;
     return sum;
