@@ -32,7 +32,7 @@ export class Input extends React.Component<Props, State> {
     const timer = setTimeout(() => {
       if (onEdited !== undefined) {
         onEdited(value);
-        this.setState({ value: this.props.value, typing: false });
+        this.setState({ value: undefined, typing: false });
       }
     }, INPUT_DELAY);
 
@@ -42,11 +42,12 @@ export class Input extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { value: this.props.value, typing: false }
+    this.state = { value: undefined, typing: false }
   }
 
   render() {
-    const props = { ...this.props, value: this.state.value };
+    const value = this.state.value === undefined ? this.props.value : this.state.value;
+    const props = { ...this.props, value: value };
     props.onChange = this.onChange;
     if (!props.margin) props.margin = 'normal';
     delete props.onEdited;
