@@ -17,6 +17,7 @@
     "@material-ui/icons": "^3.0.1",
     "classnames": "^2.2.6",
     "immutable": "^3.8.2",
+    "js-yaml": "^3.12.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.6",
     "@types/jest": "^23.3.2",
+    "@types/js-yaml": "^3.11.2",
     "@types/node": "^10.10.1",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
