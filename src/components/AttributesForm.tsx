@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Sheet } from "../types";
+import { Sheet } from "../system/sheet";
 import { Number } from "./controls/Number";
 import { Attributes, Characteristics } from "../system/attributes";
 import { editAttribute } from "../actions";
@@ -43,7 +43,9 @@ class AttributesForm extends React.Component<Props, State> {
             <Button variant='contained'>教育增强</Button>
           </div>
         </div>
-        <Number label="幸运" />
+        <div>
+          <Number label="幸运" /><Button variant='contained'>恢复幸运</Button>
+        </div>
       </div>
     );
   }
@@ -53,8 +55,8 @@ class AttributesForm extends React.Component<Props, State> {
 const mapStateToProps = (state: Sheet) => ({ attributes: state.attributes });
 
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onEdited: (x: Partial<Attributes>) => dispatch(editAttribute(x)),
+const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'onEdited'> => ({
+  onEdited: x => dispatch(editAttribute(x)),
 });
 
 

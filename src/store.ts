@@ -1,4 +1,4 @@
-import {applyMiddleware, createStore, Middleware} from 'redux';
+import { applyMiddleware, createStore, Middleware } from 'redux';
 import { sheet } from './reducers';
 
 

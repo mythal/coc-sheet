@@ -21,6 +21,8 @@ export interface Props extends TextFieldProps {
 
 
 export class Input extends React.Component<Props, State> {
+
+
   private onChange = (e: ChangeEvent<HTMLInputElement>) => {
     // e.persist();
     if (this.state.typingTimeout !== undefined) {

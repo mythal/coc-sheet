@@ -1,28 +1,25 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 
-import { Information, Sheet } from '../types';
+import { Information } from '../system/information';
 import { Input } from './controls/Input';
 import { connect } from 'react-redux';
 import { editInformation } from '../actions';
 import { Number } from './controls/Number';
 import { Button } from '@material-ui/core';
+import { Sheet } from "../system/sheet";
 
 
 interface Props {
   information: Information;
-  edit: (next: Information) => void;
+  edit: (next: Partial<Information>) => void;
 }
 
 
 const InformationForm = ({ information, edit }: Props) => {
-  const name = (k: keyof Information) => ({
-    value: information[k],
-    onEdited: (text: string) => {
-      let next = { ...information };
-      next[k] = text;
-      edit(next);
-    }
+  const name = (key: keyof Information) => ({
+    value: information[key],
+    onEdited: (text: string) => edit({ [key]: text })
   });
   return (
     <div>
