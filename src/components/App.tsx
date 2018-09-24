@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CssBaseline } from '@material-ui/core';
 import Sheet from './Sheet';
 
-class App extends React.Component {
+export class App extends React.Component {
 
   public render() {
     return (
@@ -11,6 +11,7 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <div>
+          <p className='title'>Sheet</p>
           <main>
             <Sheet />
           </main>

@@ -19,7 +19,7 @@ interface State {
 }
 
 
-class AttributesForm extends React.Component<Props, State> {
+export class AttributesForm extends React.Component<Props, State> {
   render() {
     const name = (key: keyof Characteristics) => {
       const onEdited = (value: number) =>

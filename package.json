@@ -10,7 +10,7 @@
     "start": "parcel public/index.html",
     "build": "NODE_ENV=production parcel build --public-url '.' public/index.html",
     "format": "tsfmt -r",
-    "test": "jest"
+    "test": "jest --env=jsdom"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.0",
@@ -25,14 +25,19 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
+    "@types/enzyme": "^3.1.14",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.2",
     "@types/js-yaml": "^3.11.2",
     "@types/node": "^10.10.1",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
     "@types/react-redux": "^6.0.9",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "jest": "^23.6.0",
     "parcel-bundler": "^1.9.7",
+    "react-test-renderer": "^16.5.2",
     "ts-jest": "^23.10.1",
     "tslint": "^5.11.0",
     "typescript": "^3.0.3",
