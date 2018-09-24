@@ -8,6 +8,8 @@ interface Props {
   disable?: boolean;
   label?: string;
   onEdited?: (x: number) => void;
+  max?: number;
+  min?: number;
 }
 
 interface State {
@@ -28,24 +30,14 @@ export class Number extends React.Component<Props, State> {
     }
 
     const number = parseInt(text);
-    if (!isNaN(number)) { onEdited(number) }
+    if (isNaN(number)) { return }
+    else if (number >= 1e20) { onEdited(1e20 - 1) }
+    else { onEdited(number) }
   };
 
   constructor(props: Props) {
     super(props);
     this.state = { cleared: false }
-  }
-
-  render() {
-    const className = this.props.className;
-    const disable = this.props.disable === true;
-
-    return (
-      <Input type='number' value={this.value()}
-        id={this.props.id} className={className}
-        disabled={disable} label={this.props.label}
-        onEdited={value => this.update(value)} />
-    );
   }
 
   private value(): string {
@@ -54,5 +46,23 @@ export class Number extends React.Component<Props, State> {
     // user can remove all number, don't remain '0'.
     return value === undefined || (value === 0 && cleared) ? '' : value.toFixed();
   }
+
+  render() {
+    const className = this.props.className;
+    const disable = this.props.disable === true;
+    let outOfRange = false;
+    if (this.props.value !== undefined) {
+      outOfRange = this.props.max !== undefined && this.props.max < this.props.value;
+      if (!outOfRange)
+        outOfRange = this.props.min !== undefined && this.props.min > this.props.value;
+    }
+    return (
+      <Input type='tel' value={this.value()} error={outOfRange}
+        id={this.props.id} className={className}
+        disabled={disable} label={this.props.label}
+        onEdited={value => this.update(value)} />
+    );
+  }
+
 }
 

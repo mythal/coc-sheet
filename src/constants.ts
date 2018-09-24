@@ -20,10 +20,10 @@ export const DISABLE_POINT_BUY = 'DISABLE_POINT_BUY';
 export const EDIT_ATTRIBUTE = 'EDIT_ATTRIBUTE';
 export const APPLY_MODIFIER = 'APPLY_MODIFIER';
 export const AUTO_AGE = 'AUTO_AGE';
-export const EDIT_AGE = 'EDIT_AGE';
-export const EDIT_HP = 'EDIT_HP';
-export const EDIT_MP = 'EDIT_MP';
-export const EDIT_SAN = 'EDIT_SAN';
+// export const EDIT_AGE = 'EDIT_AGE';
+// export const EDIT_HP = 'EDIT_HP';
+// export const EDIT_MP = 'EDIT_MP';
+// export const EDIT_SAN = 'EDIT_SAN';
 export const RECOVER_LUCK = 'RECOVER_LUCK'; // P99
 
 // Skill

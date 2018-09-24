@@ -1,5 +1,6 @@
-import { EDIT_NOTE, EDIT_INFORMATION } from './constants';
+import { EDIT_NOTE, EDIT_INFORMATION, EDIT_ATTRIBUTE } from './constants';
 import { Information } from './types';
+import { Attributes } from "./system/attributes";
 
 
 export interface EditNote {
@@ -17,7 +18,17 @@ export interface EditInformation {
   next: Information;
 }
 
+
 export const editInformation = (next: Information): EditInformation => {
   return { type: EDIT_INFORMATION, next: next };
 };
 
+
+export interface EditAttribute {
+  type: typeof EDIT_ATTRIBUTE;
+  attr: Partial<Attributes>;
+}
+
+export const editAttribute = (attr: Partial<Attributes>): EditAttribute => {
+  return { type: EDIT_ATTRIBUTE, attr: attr }
+};
