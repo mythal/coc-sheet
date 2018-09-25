@@ -16,3 +16,7 @@ export function roll(n: number = 1, face: number = 100): Array<number> {
 export function choice(xs: Array<any>) {
   return xs[Math.floor(Math.random() * xs.length)];
 }
+
+
+
+

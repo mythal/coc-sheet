@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import { information } from "./information";
 import { attributes } from "./attributes";
 import { backstory } from "./backstory";
+import { logs } from "./logs";
 
 
 function note(state: string = '', action: EditNote) {
@@ -16,5 +17,5 @@ function note(state: string = '', action: EditNote) {
 
 
 export const sheet = combineReducers<Sheet>(
-  { note, information, attributes, backstory }
+  { note, information, attributes, backstory, logs }
 );

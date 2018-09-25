@@ -1,15 +1,20 @@
 import {
-  EDIT_NOTE,
-  EDIT_INFORMATION,
+  AUTO_AGE,
+  AUTO_ATTRIBUTE,
   EDIT_ATTRIBUTE,
   EDIT_BACKSTORY,
-  SELECT_KEY_CONNECTION,
-  AUTO_ATTRIBUTE, AUTO_AGE, RECOVER_LUCK, EDIT_SKILL
+  EDIT_INFORMATION,
+  EDIT_NOTE,
+  EDIT_SKILL,
+  LOG,
+  RECOVER_LUCK,
+  SELECT_KEY_CONNECTION
 } from './constants';
 import { Information } from './system/information';
 import { Attributes } from "./system/attributes";
 import { Backstory } from "./system/backstory";
 import { Skill } from "./system/skills";
+import { LogRecord } from "./system/logger";
 
 
 export interface EditNote {
@@ -32,10 +37,11 @@ export const editInformation = (next: Partial<Information>): EditInformation => 
 
 export interface EditAttribute {
   type: typeof EDIT_ATTRIBUTE;
-  attr: Partial<Attributes>;
+  next: Partial<Attributes>;
 }
 
-export const editAttribute = (attr: Partial<Attributes>): EditAttribute => ({ type: EDIT_ATTRIBUTE, attr });
+export const editAttribute = (next: Partial<Attributes>)
+  : EditAttribute => ({ type: EDIT_ATTRIBUTE, next });
 
 
 export interface EditBackstory {
@@ -86,11 +92,21 @@ export function recoverLuck(luck: number): RecoverLuck {
   return { type: RECOVER_LUCK, luck };
 }
 
-
-
 export interface EditSkill {
   type: typeof EDIT_SKILL;
   skill: Skill;
 }
 
+
 export const editSkill = (skill: Skill): EditSkill => ({ type: EDIT_SKILL, skill });
+
+
+
+export interface Log {
+  type: typeof LOG;
+  record: LogRecord;
+}
+
+
+export const log = (record: LogRecord): Log => ({ type: LOG, record });
+

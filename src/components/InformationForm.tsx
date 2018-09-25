@@ -5,8 +5,6 @@ import { Information } from '../system/information';
 import { Input } from './controls/Input';
 import { connect } from 'react-redux';
 import { editInformation } from '../actions';
-import { Number } from './controls/Number';
-import { Button } from '@material-ui/core';
 import { Sheet } from "../system/sheet";
 
 
@@ -27,7 +25,6 @@ const InformationForm = ({ information, edit }: Props) => {
       <Input label='玩家' {...name('player')} />
       <Input label='性别' {...name('sex')} />
       <Input label='职业' {...name('occupation')} />
-      <div><Number label='年龄' /><Button variant='contained'>随机年龄</Button></div>
       <Input label='居住地' {...name('residence')} />
       <Input label='出生地' {...name('birthplace')} />
       <Input label='时代' {...name('era')} />

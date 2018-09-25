@@ -11,7 +11,6 @@ export class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <div>
-          <p className='title'>Sheet</p>
           <main>
             <Sheet />
           </main>

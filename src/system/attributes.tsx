@@ -1,6 +1,7 @@
 import { r } from './roll';
 
 export interface Attributes {
+  age: number;
   str: number;
   con: number;
   siz: number;
@@ -10,8 +11,6 @@ export interface Attributes {
   pow: number;
   edu: number;
   luck: number;
-  db: string;
-  build: number;
 }
 
 
@@ -22,6 +21,20 @@ export type Characteristics = Pick<Attributes, Characteristic>
 export const characteristics: Array<keyof Characteristics> = [
   'str', 'con', 'siz', 'dex', 'app', 'int', 'pow', 'edu'
 ];
+
+
+export const AttributeName: { [K in keyof Attributes]: string } = {
+  age: '年龄',
+  str: '力量',
+  con: '体质',
+  siz: '体型',
+  dex: '敏捷',
+  app: '外貌',
+  int: '智力',
+  pow: '意志',
+  edu: '教育',
+  luck: '幸运'
+};
 
 
 export const autoAttributes = (): Characteristics =>
@@ -38,6 +51,14 @@ export const autoAttributes = (): Characteristics =>
 
 
 
+export const rollLuck = (young = false): [number, number] => {
+  const a = 5 * r(3, 6);
+  const b = 5 * r(3, 6);
+  return young && b > a ? [b, a] : [a, b];
+};
+
+
+
 export const eduEnhance = (edu: number) => {
   if (r(1, 100) > edu) {
     edu = Math.min(99, edu + r(1, 10));
@@ -46,7 +67,8 @@ export const eduEnhance = (edu: number) => {
 };
 
 
-export const computeDbBuild = ({ str, siz }: Pick<Attributes, 'str' | 'siz'>): Pick<Attributes, 'db' | 'build'> | null => {
+export const computeDbBuild = ({ str, siz }: Pick<Attributes, 'str' | 'siz'>):
+  { db: string, build: number } | null => {
   const sum = str + siz;
   if (sum <= 64 && sum > 1) return { db: '-2', build: -2, };
   else if (sum <= 84) return { db: '-1', build: -1, };
@@ -61,8 +83,8 @@ export const computeDbBuild = ({ str, siz }: Pick<Attributes, 'str' | 'siz'>): P
 };
 
 
-
-export function mov(age: number, { dex, str, siz }: Pick<Attributes, 'dex' | 'str' | 'siz'>) {
+export function mov(age: number, { dex, str, siz }:
+  Pick<Attributes, 'dex' | 'str' | 'siz'>) {
   let mov = 0;
   if (dex < siz && str < siz) mov = 7;
   if (dex >= siz || str >= siz) mov = 8;

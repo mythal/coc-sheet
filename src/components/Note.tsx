@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-const Note = ({ value, onChange }: Props) => {
+export const Note = ({ value, onChange }: Props) => {
   return (
     <Input label='调查员笔记' value={value} onEdited={onChange} multiline />
   );
