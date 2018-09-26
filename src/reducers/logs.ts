@@ -13,7 +13,7 @@ export const logs = (state: Array<LogRecord> = [], action: Log) => {
         let next = state.slice();
         let prev = next[last];
         if (record.type === 'Modified' && prev.type === 'Modified') {
-          if (prev.old !== undefined) record.old = prev.old;
+          record.old = prev.old;
           if (prev.remark) record.remark = prev.remark + ', ' + record.remark;
         }
         record.count += prev.count;

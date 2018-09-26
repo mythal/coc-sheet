@@ -109,15 +109,18 @@ export class AttributesForm extends React.Component<Props, State> {
 
   render() {
     const className = this.props.classes.point;
-    const name = (key: keyof Attributes) => {
+    const name = (key: keyof Attributes, initial?: number) => {
       const display = AttributeName[key];
       const onEdited = (value: number) => (this.modifyAttribute(key, value));
+      const attr = this.props.attributes[key];
+      const value = attr === undefined ? initial : attr;
       return (
         {
           label: display,
-          value: this.props.attributes[key],
+          value,
           className: className,
           placeholder: key.toUpperCase(),
+          onClick: () => {if (attr === undefined && value !== undefined) onEdited(value)},
           onEdited
         }
       );
@@ -157,17 +160,17 @@ export class AttributesForm extends React.Component<Props, State> {
         </div>
         <Grid container spacing={16}>
           <Grid item>
-            <Number {...name('hp')} max={hpMax} /> {hpMax ? <span>/ {hpMax}</span> : null}
+            <Number {...name('hp', hpMax)} max={hpMax} /> {hpMax ? <span>/ {hpMax}</span> : null}
           </Grid>
           <Grid item>
-            <Number {...name('mp')} max={mpMax} /> {mpMax ? <span>/ {mpMax}</span> : null}
+            <Number {...name('mp', mpMax)} max={mpMax} /> {mpMax ? <span>/ {mpMax}</span> : null}
           </Grid>
           <Grid item>
-            <Number {...name('san')} max={sanMax}/>
+            <Number {...name('san', pow)} max={sanMax}/> <span>/ {sanMax}</span>
           </Grid>
 
           <Grid item>
-            <Number {...name('armor')}/>
+            <Number {...name('armor', 0)}/>
           </Grid>
           <Grid item>
             <Grid container direction='column' spacing={8}>

@@ -9,6 +9,7 @@ interface Props {
   label?: string;
   placeholder?: string;
   onEdited?: (x: number) => void;
+  onClick?: () => void;
   max?: number;
   min?: number;
 }
@@ -60,7 +61,7 @@ export class Number extends React.Component<Props, State> {
     return (
       <Input type='tel' value={this.value()} error={outOfRange}
         id={this.props.id} className={className}
-        placeholder={this.props.placeholder}
+        placeholder={this.props.placeholder} onClick={this.props.onClick}
         disabled={disable} label={this.props.label}
         onEdited={value => this.update(value)} />
     );
