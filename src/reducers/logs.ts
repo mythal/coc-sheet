@@ -8,13 +8,18 @@ export const logs = (state: Array<LogRecord> = [], action: Log) => {
   switch (action.type) {
     case LOG:
       const last = state.length - 1;
-      if (last !== -1 && state[last].key === action.record.key) {
+      const record = action.record;
+      if (last !== -1 && state[last].key === record.key) {
         let next = state.slice();
-        action.record.old = next[last].old;
-        next[last] = action.record;
+        let prev = next[last];
+        if (record.type === 'Modified' && prev.type === 'Modified') {
+          record.old = prev.old;
+          if (prev.remark) record.remark = prev.remark + ' ' + record.remark;
+        }
+        next[last] = record;
         return next;
       }
-      return state.concat([action.record]);
+      return state.concat([record]);
     default:
       return state;
   }

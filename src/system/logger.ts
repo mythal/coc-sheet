@@ -1,15 +1,14 @@
-interface Record {
-  key: string;
-  date: Date;
-}
+import { randomId } from "../utils";
 
-
-export interface Modified extends Record {
+export interface Modified {
   type: 'Modified';
+  key: string;
   display: string;
   old?: string;
   next: string;
   remark: string;
+  date: Date;
+
 }
 
 export const modifiedRecord = (key: string, display: string, next: any, old?: any, remark: string = "")
@@ -19,4 +18,15 @@ export const modifiedRecord = (key: string, display: string, next: any, old?: an
   return { type: 'Modified', key, display, next: _next, old: _old, remark, date: new Date() };
 };
 
-export type LogRecord = Modified;
+
+export interface Info {
+  type: 'Info';
+  date: Date;
+  message: string;
+  key: string;
+}
+
+export const infoRecord = (message: string, key = randomId())
+  : Info => ({ type: 'Info', date: new Date(), message, key});
+
+export type LogRecord = Modified | Info;

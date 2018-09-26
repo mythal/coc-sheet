@@ -46,11 +46,14 @@ export const rollLuck = (young = false): [number, number] => {
 
 
 
-export const eduEnhance = (edu: number) => {
-  if (r(1, 100) > edu) {
-    edu = Math.min(99, edu + r(1, 10));
+export const enhance = (attr: number): {check: number, delta: number, attr: number} => {
+  const check = r(1, 100);
+  let delta = 0;
+  if (check > attr) {
+    delta = r(1, 10);
+    attr = Math.min(99, attr + delta);
   }
-  return edu;
+  return {check, delta, attr};
 };
 
 
@@ -83,3 +86,5 @@ export function mov(age: number, { dex, str, siz }:
   else if (age >= 40) mov -= 1;
   return mov;
 }
+
+

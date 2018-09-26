@@ -2,13 +2,33 @@ import * as React from 'react';
 
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
-import { Modified } from "../system/logger";
+import { Info, Modified } from "../system/logger";
 import { LogRecord } from "../system/logger";
-import { Icon, List, ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
+import {
+  Icon,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  createStyles,
+  withStyles,
+  Typography
+} from "@material-ui/core";
+import { formatDate } from "../utils";
+
+
+const styles = createStyles({
+  root: {
+  }
+});
+
 
 
 interface Props {
   logs: Array<LogRecord>,
+  classes: {
+    root: string;
+  }
 }
 
 
@@ -39,16 +59,34 @@ class Log extends React.Component<Props, State> {
     }
   }
 
+  static info(record: Info) {
+    return (
+      <>
+        <ListItemIcon><Icon fontSize='inherit'>info</Icon></ListItemIcon>
+        <ListItemText>{record.message}</ListItemText>
+      </>
+    );
+  }
+
+  static dispatch(record: LogRecord) {
+    switch (record.type) {
+      case 'Info': return Log.info(record);
+      case 'Modified': return Log.modified(record);
+    }
+  }
+
   render() {
-    const logs = this.props.logs.map((record: LogRecord, index: number) => {
-      switch (record.type) {
-        case 'Modified': return (<ListItem key={index}>{Log.modified(record)}</ListItem>);
-      }
-    });
+    const logs = this.props.logs
+      .map((record: LogRecord, index: number) => (
+        <ListItem key={index}>
+          {Log.dispatch(record)}
+          <Typography color='textSecondary'>{formatDate(record.date)}</Typography>
+        </ListItem>
+      ));
     return (
       <div>
-        <List>
-          { logs }
+        <List className={this.props.classes.root}>
+          { logs.reverse() }
         </List>
       </div>
     );
@@ -59,4 +97,4 @@ class Log extends React.Component<Props, State> {
 const mapStateToProps = (state: Sheet): Partial<Props> => ({logs: state.logs});
 
 
-export default connect(mapStateToProps)(Log);
+export default connect(mapStateToProps)(withStyles(styles)(Log));
