@@ -1,4 +1,5 @@
 import { randomIntFromInterval } from '../utils';
+import { AGE_OUT_OF_RANGE, AGE_YOUNG, ageNormalHint } from "../text/zh-Hans";
 
 export interface OutRange { type: 'OutRange' }
 
@@ -64,17 +65,13 @@ export function ageAffect(age: number): Normal | Young | OutRange {
 export function ageHint(age: number) {
   const affect = ageAffect(age);
   if (affect.type === 'OutRange') {
-    return '超出可选范围，请与守密人协商。';
+    return AGE_OUT_OF_RANGE;
   }
   else if (affect.type === 'Young') {
-    return '力量和体型合计减 5 点。教育减 5 点。 决定幸运值时可以骰 2 次并取较好的一次。';
+    return AGE_YOUNG;
   }
   else if (affect.type === 'Normal') {
-    let hint = '';
-    if (affect.eduEnhance !== 0) hint += `对教育进行 ${affect.eduEnhance} 次增强检定。`;
-    if (affect.multiDeduct !== 0) hint += `力量体质敏捷合计减 ${affect.multiDeduct}。`;
-    if (affect.appDeduct !== 0) hint += `外貌减 ${affect.appDeduct} 点。`;
-    return hint;
+    return ageNormalHint(affect);
   }
   return null;
 }

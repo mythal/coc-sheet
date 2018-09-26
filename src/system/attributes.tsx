@@ -1,4 +1,5 @@
 import { r } from './roll';
+export { AttributeName } from "../text/zh-Hans";
 
 export interface Attributes {
   age: number;
@@ -21,20 +22,6 @@ export type Characteristics = Pick<Attributes, Characteristic>
 export const characteristics: Array<keyof Characteristics> = [
   'str', 'con', 'siz', 'dex', 'app', 'int', 'pow', 'edu'
 ];
-
-
-export const AttributeName: { [K in keyof Attributes]: string } = {
-  age: '年龄',
-  str: '力量',
-  con: '体质',
-  siz: '体型',
-  dex: '敏捷',
-  app: '外貌',
-  int: '智力',
-  pow: '意志',
-  edu: '教育',
-  luck: '幸运'
-};
 
 
 export const autoAttributes = (): Characteristics =>
