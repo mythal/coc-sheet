@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
-import { Info, Modified } from "../system/logger";
+import { Info, infoRecord, Modified } from "../system/logger";
 import { LogRecord } from "../system/logger";
 import {
   Icon,
@@ -12,9 +12,11 @@ import {
   ListItemIcon,
   createStyles,
   withStyles,
-  Typography, Badge, Button
+  Typography, Badge, Button, TextField, Grid
 } from "@material-ui/core";
 import { formatDate } from "../utils";
+import { Dispatch } from "redux";
+import { log } from "../actions";
 
 
 const styles = createStyles({
@@ -22,6 +24,9 @@ const styles = createStyles({
   },
   content: {
     paddingRight: '1em',
+  },
+  logInput: {
+    width: '100%'
   }
 });
 
@@ -29,15 +34,18 @@ const styles = createStyles({
 
 interface Props {
   logs: Array<LogRecord>,
+  logger: (record: LogRecord) => void;
   classes: {
     root: string;
     content: string;
+    logInput: string;
   }
 }
 
 
 interface State {
   size?: number;
+  current: string;
 }
 
 
@@ -47,7 +55,7 @@ const NUM = 10;
 class Log extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {size: NUM};
+    this.state = {size: NUM, current: ''};
   }
 
 
@@ -104,6 +112,11 @@ class Log extends React.Component<Props, State> {
     }
   }
 
+  logInput = () => {
+    this.props.logger(infoRecord(this.state.current));
+    this.setState({current: ''});
+  };
+
   render() {
     const length = this.props.logs.length;
     const currentSize = this.state.size;
@@ -118,6 +131,18 @@ class Log extends React.Component<Props, State> {
       .slice(0, currentSize);
     return (
       <div>
+        <Grid container justify='space-around' alignItems='baseline'>
+          <Grid item>
+            <TextField value={this.state.current}
+                       label='日志'
+                       className={this.props.classes.logInput}
+                       placeholder='描述人物的变化'
+                       onChange={e => this.setState({current: e.currentTarget.value})}
+                       multiline />
+          </Grid>
+          <Grid item><Button variant='contained' onClick={this.logInput}>记录</Button></Grid>
+        </Grid>
+
         { currentSize ? null : <Button onClick={() => this.setState({size: NUM})}>只显示最近 {NUM} 条</Button> }
         <List className={this.props.classes.root}>{ logs }</List>
         { currentSize && length > currentSize ? <Button onClick={() => this.setState({size: undefined})}>显示所有 {length} 条</Button> : null }
@@ -130,4 +155,11 @@ class Log extends React.Component<Props, State> {
 const mapStateToProps = (state: Sheet): Partial<Props> => ({logs: state.logs});
 
 
-export default connect(mapStateToProps)(withStyles(styles)(Log));
+
+const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'logger'> => ({
+  logger: record => dispatch(log(record)),
+});
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Log));
