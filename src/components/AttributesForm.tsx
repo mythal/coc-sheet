@@ -17,6 +17,7 @@ import { editAttribute, logger} from "../actions";
 import { Button, Chip, createStyles, Grid, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
+import { hasOwnProperty } from "tslint/lib/utils";
 
 
 const styles = createStyles(
@@ -56,7 +57,9 @@ export class AttributesForm extends React.Component<Props, State> {
     let [luck, discardLuck] = rollLuck(isYoung);
     const next: Partial<Attributes> = {...autoAttributes(), luck};
     this.props.onEdited(next);
-    let info = '随机生成了属性点';
+    let sum = 0;
+    for (let key in next) { if (hasOwnProperty(next, key)) sum += next[key]; }
+    let info = `随机生成了属性点, 合计 ${sum} 点`;
     if (isYoung) {
       info += `, 幸运已根据年龄调整：取 ${luck} 和 ${discardLuck} 中较大值`;
     }
