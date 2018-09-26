@@ -18,18 +18,18 @@ interface State {
 
 class Log extends React.Component<Props, State> {
 
-  modified(record: Modified) {
+  static modified(record: Modified) {
     const remark = record.remark ? <span>({record.remark})</span> : null;
     if (record.old === undefined) {
       return <Typography><Icon fontSize='inherit'>add</Icon> {record.display} {record.next} {remark}</Typography>
     }
-    return <Typography><Icon fontSize='inherit'>edit</Icon>{record.display} {record.old} <Icon fontSize='inherit'>arrow_forward</Icon> {record.next} {remark}</Typography>;
+    return <Typography><Icon fontSize='inherit'>edit</Icon> {record.display} {record.old} <Icon fontSize='inherit'>arrow_forward</Icon> {record.next} {remark}</Typography>;
   }
 
   render() {
     const logs = this.props.logs.map((record: LogRecord, index: number) => {
       switch (record.type) {
-        case 'Modified': return (<li key={index}>{this.modified(record)}</li>);
+        case 'Modified': return (<li key={index}>{Log.modified(record)}</li>);
       }
     });
     return (

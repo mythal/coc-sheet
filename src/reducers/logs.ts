@@ -8,8 +8,9 @@ export const logs = (state: Array<LogRecord> = [], action: Log) => {
   switch (action.type) {
     case LOG:
       const last = state.length - 1;
-      if (last !== -1 && state[last].key === action.record.key && state[last].old != undefined) {
+      if (last !== -1 && state[last].key === action.record.key) {
         let next = state.slice();
+        action.record.old = next[last].old;
         next[last] = action.record;
         return next;
       }
