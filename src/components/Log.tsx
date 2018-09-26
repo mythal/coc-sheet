@@ -12,7 +12,7 @@ import {
   ListItemIcon,
   createStyles,
   withStyles,
-  Typography, Badge
+  Typography, Badge, Button
 } from "@material-ui/core";
 import { formatDate } from "../utils";
 
@@ -37,10 +37,19 @@ interface Props {
 
 
 interface State {
+  size?: number;
 }
 
 
+const NUM = 10;
+
+
 class Log extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {size: NUM};
+  }
+
 
   modified(record: Modified) {
     const remark = record.remark ? <span>({record.remark})</span> : null;
@@ -96,18 +105,22 @@ class Log extends React.Component<Props, State> {
   }
 
   render() {
+    const length = this.props.logs.length;
+    const currentSize = this.state.size;
     const logs = this.props.logs
       .map((record: LogRecord, index: number) => (
         <ListItem key={index}>
           {this.dispatch(record)}
           <Typography color='textSecondary'>{formatDate(record.date)}</Typography>
         </ListItem>
-      ));
+      ))
+      .reverse()
+      .slice(0, currentSize);
     return (
       <div>
-        <List className={this.props.classes.root}>
-          { logs.reverse() }
-        </List>
+        { currentSize ? null : <Button onClick={() => this.setState({size: NUM})}>只显示最近 {NUM} 条</Button> }
+        <List className={this.props.classes.root}>{ logs }</List>
+        { currentSize && length > currentSize ? <Button onClick={() => this.setState({size: undefined})}>显示所有 {length} 条</Button> : null }
       </div>
     );
   }

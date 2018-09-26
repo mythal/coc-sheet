@@ -96,10 +96,12 @@ export class AttributesForm extends React.Component<Props, State> {
       );
     };
 
+    const {age, edu, luck} = this.props.attributes;
+
     return (
       <div>
         <div>
-          <Number label="年龄" value={this.props.attributes.age} onEdited={this.changeAge} />
+          <Number label="年龄" value={age} onEdited={this.changeAge} />
           <Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button>
           <Number {...name("str")} max={99}/>
           <Number {...name("con")} max={99}/>
@@ -109,8 +111,9 @@ export class AttributesForm extends React.Component<Props, State> {
           <Number {...name("int")} max={99}/>
           <Number {...name("pow")} />
           <Number {...name("edu")} max={99}/>
-          <Button variant='contained' onClick={this.doEduEnhance}>教育增强</Button>
-          <Number {...name("luck")} /><Button variant='contained' onClick={this.doLuckEnhance}>幸运增强</Button>
+          <Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button>
+          <Number {...name("luck")} />
+          <Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button>
           <Button onClick={() => this.generate()} variant='contained'>随机属性</Button>
         </div>
       </div>

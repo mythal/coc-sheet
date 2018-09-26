@@ -3,17 +3,22 @@ import Note from './Note';
 import InformationForm from './InformationForm';
 import Attributes from "./AttributesForm";
 import Log from "./Log";
+import { Grid } from "@material-ui/core";
 
 
 const Sheet = () => {
   return (
-    <div>
-      <InformationForm />
-      <Attributes />
-      <Note />
-      <Log />
+    <Grid container spacing={16}>
+      <Grid item md={8}>
+        <InformationForm />
+        <Attributes />
+        <Note />
+      </Grid>
+      <Grid item md={4}>
+        <Log />
+      </Grid>
 
-    </div>
+    </Grid>
   );
 };
 
