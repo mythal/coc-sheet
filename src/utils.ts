@@ -10,6 +10,8 @@ export function randomIntFromInterval(min: number, max: number): number {
 export const randomId = () => uuid1();
 
 
-export const formatTime = (date: Date) => `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+export const pad = (x: number) => x > 9 ? x : '0' + String(x);
 
-export const formatDate = (date: Date) => (formatTime(date)+` ${date.getMonth() + 1}-${date.getDay()}`);
+export const formatTime = (date: Date) => `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+
+export const formatDate = (date: Date) => (formatTime(date)+` ${date.getMonth() + 1}/${pad(date.getDay())}`);

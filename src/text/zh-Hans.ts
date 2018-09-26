@@ -11,7 +11,11 @@ export const AttributeName: { [K in keyof Attributes]: string } = {
   int: '智力',
   pow: '意志',
   edu: '教育',
-  luck: '幸运'
+  luck: '幸运',
+  hp: '体力',
+  mp: '魔力',
+  san: '理智',
+  armor: '护甲',
 };
 
 

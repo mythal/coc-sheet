@@ -4,11 +4,28 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
 import { Number } from "./controls/Number";
-import { AttributeName, Attributes, autoAttributes, enhance, rollLuck } from "../system/attributes";
+import {
+  AttributeName,
+  Attributes,
+  autoAttributes,
+  computeDbBuild,
+  computeHp, computeMov, computeMp,
+  enhance,
+  rollLuck
+} from "../system/attributes";
 import { editAttribute, log} from "../actions";
-import { Button } from "@material-ui/core";
+import { Button, Chip, createStyles, Grid, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
+
+
+const styles = createStyles(
+  {
+    point: {
+      width: '4em',
+    }
+  }
+);
 
 
 interface LogProps {
@@ -18,6 +35,9 @@ interface LogProps {
 interface Props extends LogProps {
   attributes: Partial<Attributes>;
   onEdited: (next: Partial<Attributes>) => void;
+  classes: {
+    point: string;
+  }
 }
 
 
@@ -51,12 +71,13 @@ export class AttributesForm extends React.Component<Props, State> {
   };
 
 
-  modifyAttribute(key: keyof Attributes, next: number, message = '', log_key?: string) {
+  modifyAttribute = (key: keyof Attributes, next: number, message = '', log_key?: string) => {
     const display = AttributeName[key];
     const old = this.props.attributes[key];
-    this.props.log(modifiedRecord(log_key ? log_key : key, display, next, old, message));
+    const record = modifiedRecord(log_key ? log_key : key, display, next, old, message);
+    this.props.log(record);
     this.props.onEdited({[key]: next});
-  }
+  };
 
 
   doEduEnhance = () => {
@@ -84,24 +105,39 @@ export class AttributesForm extends React.Component<Props, State> {
   };
 
   render() {
+    const className = this.props.classes.point;
     const name = (key: keyof Attributes) => {
       const display = AttributeName[key];
       const onEdited = (value: number) => (this.modifyAttribute(key, value));
       return (
         {
-          label: `${display} ${key.toUpperCase()}`,
+          label: display,
           value: this.props.attributes[key],
+          className: className,
+          placeholder: key.toUpperCase(),
           onEdited
         }
       );
     };
 
-    const {age, edu, luck} = this.props.attributes;
-
+    const { age, edu, dex, luck, str, con, siz, pow } = this.props.attributes;
+    let db = null;
+    let build = null;
+    if (str && siz) {
+      const result = computeDbBuild({ str, siz });
+      if (result) {
+        db = <Chip label={ `伤害加深 ${result.db}` }/>;
+        build = <Chip label={ `体格 ${result.build}` }/>;
+      }
+    }
+    const mov = age && dex && str && siz ? <Chip label={`移动力 ${computeMov({age, dex, str, siz})}`}/> : null;
+    const hpMax = con && siz ? computeHp({ con, siz }) : undefined;
+    const mpMax = pow ? computeMp(pow) : undefined;
+    const sanMax = 99; // TODO: 99 - Cthulhu Mythos
     return (
       <div>
         <div>
-          <Number label="年龄" value={age} onEdited={this.changeAge} />
+          <Number label="年龄" className={className} value={age} onEdited={this.changeAge} />
           <Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button>
           <Number {...name("str")} max={99}/>
           <Number {...name("con")} max={99}/>
@@ -116,6 +152,28 @@ export class AttributesForm extends React.Component<Props, State> {
           <Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button>
           <Button onClick={() => this.generate()} variant='contained'>随机属性</Button>
         </div>
+        <Grid container spacing={16}>
+          <Grid item>
+            <Number {...name('hp')} max={hpMax} /> {hpMax ? <span>/ {hpMax}</span> : null}
+          </Grid>
+          <Grid item>
+            <Number {...name('mp')} max={mpMax} /> {mpMax ? <span>/ {mpMax}</span> : null}
+          </Grid>
+          <Grid item>
+            <Number {...name('san')} max={sanMax}/>
+          </Grid>
+
+          <Grid item>
+            <Number {...name('armor')}/>
+          </Grid>
+          <Grid item>
+            <Grid container direction='column' spacing={8}>
+              <Grid item>{db}</Grid>
+              <Grid item>{build}</Grid>
+              <Grid item>{mov}</Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -131,4 +189,4 @@ const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'onEdited' | 'log'>
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AttributesForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AttributesForm));

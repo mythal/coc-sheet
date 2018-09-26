@@ -12,6 +12,10 @@ export interface Attributes {
   pow: number;
   edu: number;
   luck: number;
+  hp: number;
+  mp: number;
+  san: number;
+  armor: number;
 }
 
 
@@ -73,8 +77,8 @@ export const computeDbBuild = ({ str, siz }: Pick<Attributes, 'str' | 'siz'>):
 };
 
 
-export function mov(age: number, { dex, str, siz }:
-  Pick<Attributes, 'dex' | 'str' | 'siz'>) {
+export function computeMov({ dex, age, str, siz }:
+  Pick<Attributes, 'age' | 'dex' | 'str' | 'siz'>): number {
   let mov = 0;
   if (dex < siz && str < siz) mov = 7;
   if (dex >= siz || str >= siz) mov = 8;
@@ -88,3 +92,8 @@ export function mov(age: number, { dex, str, siz }:
 }
 
 
+export const computeHp = ({con, siz}: Pick<Characteristics, 'con'|'siz'>)
+  : number => (Math.floor((con + siz) / 10));
+
+
+export const computeMp = (pow: number): number => (Math.floor(pow / 5));
