@@ -113,8 +113,11 @@ class Log extends React.Component<Props, State> {
   }
 
   logInput = () => {
-    this.props.logger(infoRecord(this.state.current));
-    this.setState({current: ''});
+    const text = this.state.current.trim();
+    if (text !== '') {
+      this.props.logger(infoRecord(this.state.current));
+      this.setState({current: ''});
+    }
   };
 
   render() {
