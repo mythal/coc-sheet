@@ -16,7 +16,7 @@ import {
 } from "@material-ui/core";
 import { formatDate } from "../utils";
 import { Dispatch } from "redux";
-import { log } from "../actions";
+import { logger } from "../actions";
 
 
 const styles = createStyles({
@@ -157,7 +157,7 @@ const mapStateToProps = (state: Sheet): Partial<Props> => ({logs: state.logs});
 
 
 const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'logger'> => ({
-  logger: record => dispatch(log(record)),
+  logger: record => dispatch(logger(record)),
 });
 
 

@@ -108,5 +108,5 @@ export interface Log {
 }
 
 
-export const log = (record: LogRecord): Log => ({ type: LOG, record });
+export const logger = (record: LogRecord): Log => ({ type: LOG, record });
 

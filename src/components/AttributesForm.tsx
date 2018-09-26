@@ -13,7 +13,7 @@ import {
   enhance,
   rollLuck
 } from "../system/attributes";
-import { editAttribute, log} from "../actions";
+import { editAttribute, logger} from "../actions";
 import { Button, Chip, createStyles, Grid, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
@@ -29,7 +29,7 @@ const styles = createStyles(
 
 
 interface LogProps {
-  log: (record: LogRecord) => void;
+  logger: (record: LogRecord) => void;
 }
 
 interface Props extends LogProps {
@@ -61,12 +61,12 @@ export class AttributesForm extends React.Component<Props, State> {
       info += `, 幸运已根据年龄调整：取 ${luck} 和 ${discardLuck} 中较大值`;
     }
 
-    this.props.log(infoRecord(info, 'GENERATE_ATTRIBUTES'));
+    this.props.logger(infoRecord(info, 'GENERATE_ATTRIBUTES'));
   }
 
   changeAge = (age: number = randomAge()) => {
     const hint = ageHint(age);
-    if (hint) this.props.log(infoRecord(`年龄 ${age}：${hint}`, 'EDIT_AGE'));
+    if (hint) this.props.logger(infoRecord(`年龄 ${age}：${hint}`, 'EDIT_AGE'));
     this.props.onEdited({ age });
   };
 
@@ -75,7 +75,7 @@ export class AttributesForm extends React.Component<Props, State> {
     const display = AttributeName[key];
     const old = this.props.attributes[key];
     const record = modifiedRecord(log_key ? log_key : key, display, next, old, message);
-    this.props.log(record);
+    this.props.logger(record);
     this.props.onEdited({[key]: next});
   };
 
@@ -183,9 +183,9 @@ export class AttributesForm extends React.Component<Props, State> {
 const mapStateToProps = (state: Sheet) => ({ attributes: state.attributes });
 
 
-const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'onEdited' | 'log'> => ({
+const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'onEdited' | 'logger'> => ({
   onEdited: next => dispatch(editAttribute(next)),
-  log: record => dispatch(log(record)),
+  logger: record => dispatch(logger(record)),
 });
 
 
