@@ -12,13 +12,16 @@ import {
   ListItemIcon,
   createStyles,
   withStyles,
-  Typography
+  Typography, Badge
 } from "@material-ui/core";
 import { formatDate } from "../utils";
 
 
 const styles = createStyles({
   root: {
+  },
+  content: {
+    paddingRight: '1em',
   }
 });
 
@@ -28,6 +31,7 @@ interface Props {
   logs: Array<LogRecord>,
   classes: {
     root: string;
+    content: string;
   }
 }
 
@@ -38,7 +42,7 @@ interface State {
 
 class Log extends React.Component<Props, State> {
 
-  static modified(record: Modified) {
+  modified(record: Modified) {
     const remark = record.remark ? <span>({record.remark})</span> : null;
     if (record.old === undefined) {
       return (
@@ -49,29 +53,45 @@ class Log extends React.Component<Props, State> {
       );
     }
     else {
-      const arrow = <Icon fontSize='inherit'>arrow_forward</Icon>;
+      const delta =  record.next - record.old;
+      const diff = delta > 0 ? `+${delta}` : String(delta);
+      const content = (
+        <span className={this.props.classes.content}>
+          {record.display} {record.old} ({diff}) ⇒ {record.next} {remark}
+        </span>
+      );
       return (
         <>
           <ListItemIcon><Icon fontSize='inherit'>edit</Icon></ListItemIcon>
-          <ListItemText>{record.display} {record.old} {arrow} {record.next} {remark}</ListItemText>
+          <ListItemText>{Log.withBadge(record.count, content)}</ListItemText>
         </>
       );
     }
   }
 
-  static info(record: Info) {
+  static withBadge(count: number, content: JSX.Element) {
+    if (count < 2) return content;
+    return (
+      <Badge badgeContent={count} color="primary">{content}</Badge>
+    );
+  }
+
+  info(record: Info) {
+    const className = this.props.classes.content;
     return (
       <>
         <ListItemIcon><Icon fontSize='inherit'>info</Icon></ListItemIcon>
-        <ListItemText>{record.message}</ListItemText>
+        <ListItemText>
+          {Log.withBadge(record.count, <span className={className}>{record.message}</span>)}
+        </ListItemText>
       </>
     );
   }
 
-  static dispatch(record: LogRecord) {
+  dispatch(record: LogRecord) {
     switch (record.type) {
-      case 'Info': return Log.info(record);
-      case 'Modified': return Log.modified(record);
+      case 'Info': return this.info(record);
+      case 'Modified': return this.modified(record);
     }
   }
 
@@ -79,7 +99,7 @@ class Log extends React.Component<Props, State> {
     const logs = this.props.logs
       .map((record: LogRecord, index: number) => (
         <ListItem key={index}>
-          {Log.dispatch(record)}
+          {this.dispatch(record)}
           <Typography color='textSecondary'>{formatDate(record.date)}</Typography>
         </ListItem>
       ));

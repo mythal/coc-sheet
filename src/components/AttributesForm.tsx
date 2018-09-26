@@ -36,10 +36,12 @@ export class AttributesForm extends React.Component<Props, State> {
     let [luck, discardLuck] = rollLuck(isYoung);
     const next: Partial<Attributes> = {...autoAttributes(), luck};
     this.props.onEdited(next);
-    this.props.log(infoRecord(`随机生成了属性点`));
+    let info = '随机生成了属性点';
     if (isYoung) {
-      this.props.log(infoRecord(`幸运已根据年龄调整：取 ${luck} 和 ${discardLuck} 中较大值`))
+      info += `, 幸运已根据年龄调整：取 ${luck} 和 ${discardLuck} 中较大值`;
     }
+
+    this.props.log(infoRecord(info, 'GENERATE_ATTRIBUTES'));
   }
 
   changeAge = (age: number = randomAge()) => {
@@ -48,46 +50,43 @@ export class AttributesForm extends React.Component<Props, State> {
     this.props.onEdited({ age });
   };
 
+
+  modifyAttribute(key: keyof Attributes, next: number, message = '', log_key?: string) {
+    const display = AttributeName[key];
+    const old = this.props.attributes[key];
+    this.props.log(modifiedRecord(log_key ? log_key : key, display, next, old, message));
+    this.props.onEdited({[key]: next});
+  }
+
+
   doEduEnhance = () => {
     const edu = this.props.attributes.edu;
     if (edu === undefined) return;
-    const {check, delta, attr: newEdu} = enhance(edu);
-    let info = `进行教育增强检定 1d100: ${check} `;
+    const {check, attr: newEdu} = enhance(edu);
+    let info = `增强检定 1d100: ${check} `;
     if (newEdu > edu)  {
-      info += `成功，增加 ${delta} 点`;
-      this.props.onEdited({ edu: newEdu });
+      info += `成功`;
     }
     else info += '失败';
-    this.props.log(infoRecord(info));
+    this.modifyAttribute('edu', newEdu, info);
   };
 
   doLuckEnhance = () => {
     const luck = this.props.attributes.luck;
     if (luck === undefined) return;
-    const {check, delta, attr: newLuck} = enhance(luck);
-    let info = `进行幸运增强检定 1d100: ${check} `;
+    const {check, attr: newLuck} = enhance(luck);
+    let info = `增强检定 1d100: ${check} `;
     if (newLuck > luck) {
-      info += `成功，增加 ${delta} 点`;
-      this.props.onEdited({ luck: newLuck });
+      info += `成功`;
     }
     else info += '失败';
-    this.props.log(infoRecord(info));
+    this.modifyAttribute('luck', newLuck, info);
   };
 
   render() {
     const name = (key: keyof Attributes) => {
       const display = AttributeName[key];
-      const onEdited = (value: number) => {
-        const old = this.props.attributes[key];
-        let remark = "";
-        if (old !== undefined) {
-          const delta = value - old;
-          if (delta > 0) remark = `+${delta}`;
-          else if (delta < 0) remark = String(delta);
-        }
-        this.props.log(modifiedRecord(key, display, value, old, remark));
-        this.props.onEdited({ ...this.props.attributes, [key]: value });
-      };
+      const onEdited = (value: number) => (this.modifyAttribute(key, value));
       return (
         {
           label: `${display} ${key.toUpperCase()}`,
@@ -96,8 +95,6 @@ export class AttributesForm extends React.Component<Props, State> {
         }
       );
     };
-
-
 
     return (
       <div>

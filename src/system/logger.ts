@@ -4,19 +4,16 @@ export interface Modified {
   type: 'Modified';
   key: string;
   display: string;
-  old?: string;
-  next: string;
+  old?: number;
+  next: number;
   remark: string;
   date: Date;
+  count: number;
 
 }
 
-export const modifiedRecord = (key: string, display: string, next: any, old?: any, remark: string = "")
-  : Modified => {
-  const _next = String(next);
-  const _old = old === undefined ? undefined : String(old);
-  return { type: 'Modified', key, display, next: _next, old: _old, remark, date: new Date() };
-};
+export const modifiedRecord = (key: string, display: string, next: number, old?: number, remark: string = "")
+  : Modified => ({ type: 'Modified', key, display, next, old, remark, date: new Date(), count: 1 });
 
 
 export interface Info {
@@ -24,9 +21,10 @@ export interface Info {
   date: Date;
   message: string;
   key: string;
+  count: number;
 }
 
 export const infoRecord = (message: string, key = randomId())
-  : Info => ({ type: 'Info', date: new Date(), message, key});
+  : Info => ({ type: 'Info', date: new Date(), message, key, count: 1});
 
 export type LogRecord = Modified | Info;
