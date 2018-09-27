@@ -6,6 +6,7 @@ import { Input } from './controls/Input';
 import { connect } from 'react-redux';
 import { editInformation } from '../actions';
 import { Sheet } from "../system/sheet";
+import { Grid } from "@material-ui/core";
 
 
 interface Props {
@@ -20,15 +21,15 @@ const InformationForm = ({ information, edit }: Props) => {
     onEdited: (text: string) => edit({ [key]: text })
   });
   return (
-    <div>
-      <Input label='名称' {...name('name')} />
-      <Input label='玩家' {...name('player')} />
-      <Input label='性别' {...name('sex')} />
-      <Input label='职业' {...name('occupation')} />
-      <Input label='居住地' {...name('residence')} />
-      <Input label='出生地' {...name('birthplace')} />
-      <Input label='时代' {...name('era')} />
-    </div>
+    <Grid container spacing={16}>
+      <Grid item><Input label='名称' {...name('name')} /></Grid>
+      <Grid item><Input label='玩家' {...name('player')} /></Grid>
+      <Grid item><Input label='性别' {...name('sex')} /></Grid>
+      <Grid item><Input label='职业' {...name('occupation')} /></Grid>
+      <Grid item><Input label='居住地' {...name('residence')} /></Grid>
+      <Grid item><Input label='出生地' {...name('birthplace')} /></Grid>
+      <Grid item><Input label='时代' {...name('era')} /></Grid>
+    </Grid>
   );
 };
 
