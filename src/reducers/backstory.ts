@@ -1,6 +1,6 @@
 import { Backstory } from "../system/backstory";
 
-const backstoryInit = {
+const initial = {
   personalDescription: '',
   ideologyOrBeliefs: '',
   significantPeople: '',
@@ -10,6 +10,6 @@ const backstoryInit = {
 };
 
 
-export function backstory(state: Backstory = backstoryInit) {
+export function backstory(state: Backstory = initial) {
   return state;
 }
