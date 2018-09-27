@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
-import { Number } from "./controls/Number";
+import { Number, Props as NumberProps } from "./controls/Number";
 import {
   AttributeName,
   Attributes,
@@ -14,16 +14,19 @@ import {
   rollLuck
 } from "../system/attributes";
 import { editAttribute, logger} from "../actions";
-import { Button, Chip, createStyles, Grid, withStyles } from "@material-ui/core";
+import { Button, Chip, createStyles, Grid, InputAdornment, Theme, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
 import { hasOwnProperty } from "tslint/lib/utils";
 
 
-const styles = createStyles(
+const styles = ({spacing}: Theme) => createStyles(
   {
     point: {
-      width: '4em',
+      width: '5em',
+    },
+    statsChip: {
+      margin: spacing.unit,
     }
   }
 );
@@ -38,6 +41,7 @@ interface Props extends LogProps {
   onEdited: (next: Partial<Attributes>) => void;
   classes: {
     point: string;
+    statsChip: string;
   }
 }
 
@@ -74,7 +78,7 @@ export class AttributesForm extends React.Component<Props, State> {
   };
 
 
-  modifyAttribute = (key: keyof Attributes, next: number, message = '', log_key?: string) => {
+  modifyAttribute = (key: keyof Attributes, next: number, message?: string, log_key?: string) => {
     const display = AttributeName[key];
     const old = this.props.attributes[key];
     const record = modifiedRecord(log_key ? log_key : key, display, next, old, message);
@@ -107,24 +111,33 @@ export class AttributesForm extends React.Component<Props, State> {
     this.modifyAttribute('luck', newLuck, info);
   };
 
-  render() {
+
+  fillNumberProps = (key: keyof Attributes, initial?: number, after?: number): Partial<NumberProps> => {
     const className = this.props.classes.point;
-    const name = (key: keyof Attributes, initial?: number) => {
-      const display = AttributeName[key];
-      const onEdited = (value: number) => (this.modifyAttribute(key, value));
-      const attr = this.props.attributes[key];
-      const value = attr === undefined ? initial : attr;
-      return (
-        {
-          label: display,
-          value,
-          className: className,
-          placeholder: key.toUpperCase(),
-          onClick: () => {if (attr === undefined && value !== undefined) onEdited(value)},
-          onEdited
-        }
-      );
-    };
+    const display = AttributeName[key];
+    const onEdited = (value: number) => (this.modifyAttribute(key, value));
+    const attr = this.props.attributes[key];
+    const value = attr === undefined ? initial : attr;
+    let endAdornment = undefined;
+    if (after !== undefined) endAdornment = <InputAdornment  position="end">{`/${after}`}</InputAdornment>;
+    return (
+      {
+        label: display,
+        value,
+        InputProps: {endAdornment},
+        className: className,
+        placeholder: key.toUpperCase(),
+        onClick: () => {if (attr === undefined && value !== undefined) onEdited(value)},
+        onEdited
+      }
+    );
+  };
+
+
+  render() {
+    const pointClass = this.props.classes.point;
+    const chipClass = this.props.classes.statsChip;
+    const name = this.fillNumberProps;
 
     const { age, edu, dex, luck, str, con, siz, pow } = this.props.attributes;
     let db = null;
@@ -132,53 +145,56 @@ export class AttributesForm extends React.Component<Props, State> {
     if (str && siz) {
       const result = computeDbBuild({ str, siz });
       if (result) {
-        db = <Chip label={ `伤害加深 ${result.db}` }/>;
-        build = <Chip label={ `体格 ${result.build}` }/>;
+        db = <Chip className={chipClass} label={ `伤害加深 ${result.db}` }/>;
+        build = <Chip className={chipClass} label={ `体格 ${result.build}` }/>;
       }
     }
-    const mov = age && dex && str && siz ? <Chip label={`移动力 ${computeMov({age, dex, str, siz})}`}/> : null;
+    const mov = age && dex && str && siz ? <Chip className={chipClass} label={`移动力 ${computeMov({age, dex, str, siz})}`}/> : null;
     const hpMax = con && siz ? computeHp({ con, siz }) : undefined;
     const mpMax = pow ? computeMp(pow) : undefined;
     const sanMax = 99; // TODO: 99 - Cthulhu Mythos
+
+    const characteristics = (
+      <Grid container spacing={8}>
+        <Grid item container xs={4} direction='column'>
+          <Grid><Number {...name("str")} max={99}/></Grid>
+          <Grid><Number {...name("con")} max={99}/></Grid>
+          <Grid><Number {...name("siz")} /></Grid>
+        </Grid>
+        <Grid item container xs={4} direction='column'>
+          <Grid item><Number {...name("dex")} max={99}/></Grid>
+          <Grid item><Number {...name("app")} max={99}/></Grid>
+          <Grid item><Number {...name("int")} max={99}/></Grid>
+        </Grid>
+        <Grid item container xs={4} direction='column'>
+          <Grid item><Number {...name("pow")} /></Grid>
+          <Grid item><Number {...name("edu")} max={99}/></Grid>
+          <Grid item><Number {...name("luck")} /></Grid>
+        </Grid>
+      </Grid>
+    );
+
+    const buttons = (
+      <Grid item direction='column' container spacing={16}>
+        <Grid item><Button onClick={() => this.generate()} variant='contained'>随机属性</Button></Grid>
+        <Grid item><Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button></Grid>
+        <Grid item><Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button></Grid>
+      </Grid>
+    );
+
     return (
       <div>
-        <div>
-          <Number label="年龄" className={className} value={age} onEdited={this.changeAge} />
-          <Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button>
-          <Number {...name("str")} max={99}/>
-          <Number {...name("con")} max={99}/>
-          <Number {...name("siz")} />
-          <Number {...name("dex")} max={99}/>
-          <Number {...name("app")} max={99}/>
-          <Number {...name("int")} max={99}/>
-          <Number {...name("pow")} />
-          <Number {...name("edu")} max={99}/>
-          <Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button>
-          <Number {...name("luck")} />
-          <Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button>
-          <Button onClick={() => this.generate()} variant='contained'>随机属性</Button>
-        </div>
         <Grid container spacing={16}>
-          <Grid item>
-            <Number {...name('hp', hpMax)} max={hpMax} /> {hpMax ? <span>/ {hpMax}</span> : null}
-          </Grid>
-          <Grid item>
-            <Number {...name('mp', mpMax)} max={mpMax} /> {mpMax ? <span>/ {mpMax}</span> : null}
-          </Grid>
-          <Grid item>
-            <Number {...name('san', pow)} max={sanMax}/> <span>/ {sanMax}</span>
-          </Grid>
-
-          <Grid item>
-            <Number {...name('armor', 0)}/>
-          </Grid>
-          <Grid item>
-            <Grid container direction='column' spacing={8}>
-              <Grid item>{db}</Grid>
-              <Grid item>{build}</Grid>
-              <Grid item>{mov}</Grid>
-            </Grid>
-          </Grid>
+          <Grid item   container xs={12} alignItems='center'><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /> <Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button></Grid>
+          <Grid item>{characteristics}</Grid>
+          <Grid item>{buttons}</Grid>
+        </Grid>
+        <Grid container spacing={16}>
+          <Grid item><Number {...name('hp', hpMax, hpMax)} max={hpMax} /></Grid>
+          <Grid item><Number {...name('mp', mpMax, mpMax)} max={mpMax}/></Grid>
+          <Grid item><Number {...name('san', pow, sanMax)} max={sanMax}/></Grid>
+          <Grid item><Number {...name('armor')}/></Grid>
+          <Grid item xs={4}>{db}{build}{mov}</Grid>
         </Grid>
       </div>
     );

@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { Input } from './Input';
+import { TextFieldProps } from "@material-ui/core/TextField";
 
-interface Props {
+export interface Props extends TextFieldProps {
   value?: number;
-  id?: string;
-  className?: string;
-  disable?: boolean;
-  label?: string;
-  placeholder?: string;
+  afterAdornmentText?: string;
   onEdited?: (x: number) => void;
-  onClick?: () => void;
   max?: number;
   min?: number;
 }
@@ -23,7 +19,7 @@ export class Number extends React.Component<Props, State> {
     // can't handle 'e'
     // https://github.com/facebook/react/issues/6556
     const onEdited = this.props.onEdited;
-    if (onEdited === undefined || this.props.disable === true) return;
+    if (onEdited === undefined || this.props.disabled === true) return;
 
     if (text === '') {
       onEdited(0);
@@ -50,20 +46,16 @@ export class Number extends React.Component<Props, State> {
   }
 
   render() {
-    const className = this.props.className;
-    const disable = this.props.disable === true;
     let outOfRange = false;
     if (this.props.value !== undefined) {
       outOfRange = this.props.max !== undefined && this.props.max < this.props.value;
       if (!outOfRange)
         outOfRange = this.props.min !== undefined && this.props.min > this.props.value;
     }
+    const error = this.props.error === undefined ? outOfRange : this.props.error;
     return (
-      <Input type='tel' value={this.value()} error={outOfRange}
-        id={this.props.id} className={className}
-        placeholder={this.props.placeholder} onClick={this.props.onClick}
-        disabled={disable} label={this.props.label}
-        onEdited={value => this.update(value)} />
+      <Input {...this.props} type='tel' value={this.value()} error={error}
+             id={this.props.id} onEdited={value => this.update(value)} />
     );
   }
 
