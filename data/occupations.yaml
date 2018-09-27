@@ -243,7 +243,7 @@
   skillPoint: >
     EDU * 2 + DEX * 2
   skills: 汽车驾驶，两项社交技能（魅惑、话术、恐吓、说服），聆听，机械维修，导航，侦查，任意一项其他个人或时代特长。
-- name: 司机 - 司机
+- name: 司机
   credit: [9, 20]
   skillPoint: >
     EDU * 2 + DEXorSTR * 2
