@@ -58,9 +58,17 @@ class Log extends React.Component<Props, State> {
     this.state = {size: NUM, current: ''};
   }
 
+  static remark(remarks: Array<string>) {
+    const length = remarks.length;
+    if (length === 0) return null;
+    const max = 8;
+    const xs = length > max ? remarks.slice(0, max) : remarks;
+    return <span>({xs.join(', ')}{length === xs.length ? '' : '…'})</span>
+  }
+
 
   modified(record: Modified) {
-    const remark = record.remark ? <span>({record.remark})</span> : null;
+    const remark = Log.remark(record.remarks);
     if (record.old === undefined) {
       return (
         <>

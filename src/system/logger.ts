@@ -6,14 +6,17 @@ export interface Modified {
   display: string;
   old?: number;
   next: number;
-  remark: string;
+  remarks: Array<string>;
   date: Date;
   count: number;
 
 }
 
-export const modifiedRecord = (key: string, display: string, next: number, old?: number, remark: string = "")
-  : Modified => ({ type: 'Modified', key, display, next, old, remark, date: new Date(), count: 1 });
+export const modifiedRecord = (key: string, display: string, next: number, old?: number, remark?: string)
+  : Modified => {
+  const remarks = remark === undefined ? [] : [remark];
+  return ({ type: 'Modified', key, display, next, old, remarks, date: new Date(), count: 1 });
+};
 
 
 export interface Info {
