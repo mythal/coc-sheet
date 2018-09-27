@@ -1,6 +1,10 @@
-import occupationData from '../../data/occupations.yaml';
+import { readFileSync } from 'fs';
+import { safeLoad } from 'js-yaml';
 import { Attributes } from './attributes';
 import { computeSkillPoint } from './interpreter';
+
+
+const occupationData = readFileSync('./data/occupations.yaml', 'utf-8');
 
 export interface Occupation {
   name: string;
@@ -11,7 +15,7 @@ export interface Occupation {
 }
 
 
-export const occupations = occupationData as Array<Occupation>;
+export const occupations = safeLoad(occupationData) as Array<Occupation>;
 
 
 export const occupationsSkillPoints = (attributes: Partial<Attributes>) => {
