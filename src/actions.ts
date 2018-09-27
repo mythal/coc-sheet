@@ -4,7 +4,7 @@ import {
   EDIT_ATTRIBUTE,
   EDIT_BACKSTORY,
   EDIT_INFORMATION,
-  EDIT_NOTE,
+  EDIT_NOTE, EDIT_OCCUPATION,
   EDIT_SKILL,
   LOG,
   RECOVER_LUCK,
@@ -15,6 +15,7 @@ import { Attributes } from "./system/attributes";
 import { Backstory } from "./system/backstory";
 import { Skill } from "./system/skills";
 import { LogRecord } from "./system/logger";
+import { Occupation } from "./system/occupations";
 
 
 export interface EditNote {
@@ -110,3 +111,10 @@ export interface Log {
 
 export const logger = (record: LogRecord): Log => ({ type: LOG, record });
 
+
+export interface EditOccupation {
+  type: typeof EDIT_OCCUPATION;
+  occupation: Occupation;
+}
+
+export const editOccupation = (occupation: Occupation): EditOccupation => ({type: EDIT_OCCUPATION, occupation});

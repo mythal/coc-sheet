@@ -4,6 +4,7 @@ import InformationForm from './InformationForm';
 import Attributes from "./AttributesForm";
 import Log from "./Log";
 import { Grid } from "@material-ui/core";
+import Occupations from "./OccupationForm";
 
 
 const Sheet = () => {
@@ -13,6 +14,7 @@ const Sheet = () => {
         <InformationForm />
         <Attributes />
         <Note />
+        <Occupations/>
       </Grid>
       <Grid item md={4}>
         <Log />

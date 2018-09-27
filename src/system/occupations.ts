@@ -1,4 +1,4 @@
-import occupationData from '../../data/occupations.json';
+import occupationData from '../../data/occupations.yaml';
 import { Attributes } from './attributes';
 import { computeSkillPoint } from './interpreter';
 

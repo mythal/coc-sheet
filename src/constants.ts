@@ -70,8 +70,8 @@ export const REMOVE_ASSET = 'REMOVE_ASSET';
 
 
 // Occupation
-export const DECIDE_OCCUPATION = 'DECIDE_OCCUPATION';
-export const CREATE_OCCUPATION = 'CREATE_OCCUPATION';
+// export const DECIDE_OCCUPATION = 'DECIDE_OCCUPATION';
+export const EDIT_OCCUPATION = 'EDIT_OCCUPATION';
 
 // Fellow
 export const ADD_FELLOW = 'ADD_FELLOW';
