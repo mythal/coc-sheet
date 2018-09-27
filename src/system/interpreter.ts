@@ -39,7 +39,7 @@ function eatAttr(text: string): [keyof Characteristics, string] | null {
 
 
 export function computeSkillPoint(attributes: Partial<Characteristics>, pattern: string): number | null {
-  const ERROR = -1;
+  if (pattern.trim() === '') return null;
   let sum = 0;
   let current = 0;
   let factor = 1;
@@ -49,7 +49,7 @@ export function computeSkillPoint(attributes: Partial<Characteristics>, pattern:
     if (orResult !== null) {
       rest = orResult;
       const attrResult = eatAttr(eatEmpty(rest));
-      if (attrResult === null) return ERROR;
+      if (attrResult === null) throw Error('except attribute: ' + rest);
       const [attr, attrRest] = attrResult;
       const attrValue = attributes[attr];
       if (attrValue === undefined) return null;
@@ -70,10 +70,10 @@ export function computeSkillPoint(attributes: Partial<Characteristics>, pattern:
     const mulResult = eatMul(rest);
     if (mulResult !== null) {
       rest = mulResult;
-      const digitResult = eatNumber(eatEmpty(rest));
-      if (digitResult === null) return ERROR;
-      const [n, digitRest] = digitResult;
-      rest = digitRest;
+      const numberResult = eatNumber(eatEmpty(rest));
+      if (numberResult === null) throw Error('expect number: ' + rest);
+      const [n, numberRest] = numberResult;
+      rest = numberRest;
       factor = n;
       continue
     }
