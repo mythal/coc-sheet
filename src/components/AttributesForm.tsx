@@ -27,7 +27,10 @@ const styles = ({spacing}: Theme) => createStyles(
     },
     statsChip: {
       margin: spacing.unit,
-    }
+    },
+    characteristics: {
+      maxWidth: 300,
+    },
   }
 );
 
@@ -42,6 +45,7 @@ interface Props extends LogProps {
   classes: {
     point: string;
     statsChip: string;
+    characteristics: string;
   }
 }
 
@@ -149,17 +153,27 @@ export class AttributesForm extends React.Component<Props, State> {
         build = <Chip className={chipClass} label={ `体格 ${result.build}` }/>;
       }
     }
-    const mov = age && dex && str && siz ? <Chip className={chipClass} label={`移动力 ${computeMov({age, dex, str, siz})}`}/> : null;
+    const mov = age && dex && str && siz ?
+      (<Chip className={chipClass} label={`移动力 ${computeMov({age, dex, str, siz})}`}/>) : null;
     const hpMax = con && siz ? computeHp({ con, siz }) : undefined;
     const mpMax = pow ? computeMp(pow) : undefined;
     const sanMax = 99; // TODO: 99 - Cthulhu Mythos
 
-    const characteristics = (
+    const buttons = (
       <Grid container spacing={8}>
-        <Grid item container xs={4} direction='column'>
-          <Grid><Number {...name("str")} max={99}/></Grid>
-          <Grid><Number {...name("con")} max={99}/></Grid>
-          <Grid><Number {...name("siz")} /></Grid>
+        <Grid item><Button variant='contained' color='secondary' onClick={() => this.generate()} >随机属性</Button></Grid>
+        <Grid item><Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button></Grid>
+        <Grid item><Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button></Grid>
+      </Grid>
+    );
+
+
+    const characteristics = (
+      <Grid container spacing={8} className={this.props.classes.characteristics}>
+        <Grid item container xs={4} direction='column' >
+          <Grid item><Number {...name("str")} max={99}/></Grid>
+          <Grid item><Number {...name("con")} max={99}/></Grid>
+          <Grid item><Number {...name("siz")} /></Grid>
         </Grid>
         <Grid item container xs={4} direction='column'>
           <Grid item><Number {...name("dex")} max={99}/></Grid>
@@ -174,27 +188,32 @@ export class AttributesForm extends React.Component<Props, State> {
       </Grid>
     );
 
-    const buttons = (
-      <Grid item direction='column' container spacing={16}>
-        <Grid item><Button onClick={() => this.generate()} variant='contained'>随机属性</Button></Grid>
-        <Grid item><Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button></Grid>
-        <Grid item><Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button></Grid>
+    const stats = (
+      <Grid container>
+        <Grid item container spacing={8}>
+          <Grid item><Number {...name('hp', hpMax, hpMax)} max={hpMax} /></Grid>
+          <Grid item><Number {...name('mp', mpMax, mpMax)} max={mpMax}/></Grid>
+          <Grid item><Number {...name('san', pow, sanMax)} max={sanMax}/></Grid>
+          <Grid item><Number {...name('armor')}/></Grid>
+        </Grid>
+        <Grid item>{db}{build}{mov}</Grid>
       </Grid>
     );
 
     return (
       <div>
         <Grid container spacing={16}>
-          <Grid item   container xs={12} alignItems='center'><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /> <Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button></Grid>
-          <Grid item>{characteristics}</Grid>
-          <Grid item>{buttons}</Grid>
-        </Grid>
-        <Grid container spacing={16}>
-          <Grid item><Number {...name('hp', hpMax, hpMax)} max={hpMax} /></Grid>
-          <Grid item><Number {...name('mp', mpMax, mpMax)} max={mpMax}/></Grid>
-          <Grid item><Number {...name('san', pow, sanMax)} max={sanMax}/></Grid>
-          <Grid item><Number {...name('armor')}/></Grid>
-          <Grid item xs={4}>{db}{build}{mov}</Grid>
+          <Grid item container xs={12} alignItems='baseline' spacing={8}>
+            <Grid item><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /></Grid>
+            <Grid item><Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button></Grid>
+          </Grid>
+          <Grid item sm={12} md={5}>
+            {characteristics}
+            {buttons}
+          </Grid>
+          <Grid item sm={12} md={7}>
+            {stats}
+          </Grid>
         </Grid>
       </div>
     );
