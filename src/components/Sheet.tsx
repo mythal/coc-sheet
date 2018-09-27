@@ -3,13 +3,19 @@ import Note from './Note';
 import InformationForm from './InformationForm';
 import Attributes from "./AttributesForm";
 import Log from "./Log";
-import { Grid } from "@material-ui/core";
+import { createStyles, Grid, Theme, withStyles } from "@material-ui/core";
 import Occupations from "./OccupationForm";
 
 
-const Sheet = () => {
+const styles = ({spacing}: Theme) => createStyles({
+  root: {
+    padding: spacing.unit * 2,
+  }
+});
+
+const Sheet = (props: {classes: {root: string}}) => {
   return (
-    <Grid container spacing={16}>
+    <Grid className={props.classes.root} container spacing={16}>
       <Grid item md={8}>
         <InformationForm />
         <Attributes />
@@ -25,4 +31,4 @@ const Sheet = () => {
 };
 
 
-export default Sheet;
+export default withStyles(styles)(Sheet);
