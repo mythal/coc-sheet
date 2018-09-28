@@ -32,14 +32,14 @@ class BackstoryForm extends React.Component<Props, State> {
 
     return (
       <Grid container spacing={16}>
-        <Grid md={8} item><Input {...name("personalDescription")} /></Grid>
-        <Grid md={4} item><Input {...name("ideologyOrBeliefs")} /></Grid>
-        <Grid md={4} item><Input {...name("significantPeople")} /></Grid>
-        <Grid md={4} item><Input {...name("meaningfulLocations")} /></Grid>
-        <Grid md={4} item><Input {...name("treasuredPossessions")} /></Grid>
-        <Grid md={4} item><Input {...name("traits")} /></Grid>
-        <Grid md={4} item><Input {...name("injuriesAndScars")} /></Grid>
-        <Grid md={4} item><Input {...name("phobiasAndManias")} /></Grid>
+        <Grid xs={12} md={8} item><Input {...name("personalDescription")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("ideologyOrBeliefs")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("significantPeople")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("meaningfulLocations")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("treasuredPossessions")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("traits")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("injuriesAndScars")} /></Grid>
+        <Grid xs={12} md={4} item><Input {...name("phobiasAndManias")} /></Grid>
       </Grid>
     );
   }
