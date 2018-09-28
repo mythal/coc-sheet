@@ -23,12 +23,12 @@ const InformationForm = ({ information, edit }: Props) => {
   });
   return (
     <Grid container spacing={16}>
-      <Grid sm={6} md={4} item><Input label='名称' {...name('name')} /></Grid>
-      <Grid sm={6} md={4} item><Input label='玩家' {...name('player')} /></Grid>
-      <Grid sm={6} md={4} item><Input label='性别' {...name('sex')} /></Grid>
-      <Grid sm={6} md={4} item><Input label='居住地' {...name('residence')} /></Grid>
-      <Grid sm={6} md={4} item><Input label='出生地' {...name('birthplace')} /></Grid>
-      <Grid sm={6} md={4} item><Input label='时代' {...name('era')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='名称' {...name('name')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='玩家' {...name('player')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='性别' {...name('sex')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='居住地' {...name('residence')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='出生地' {...name('birthplace')} /></Grid>
+      <Grid xs={12} sm={6} md={4} item><Input label='时代' {...name('era')} /></Grid>
     </Grid>
   );
 };
