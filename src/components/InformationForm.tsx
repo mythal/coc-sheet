@@ -18,16 +18,17 @@ interface Props {
 const InformationForm = ({ information, edit }: Props) => {
   const name = (key: keyof Information) => ({
     value: information[key],
+    fullWidth: true,
     onEdited: (text: string) => edit({ [key]: text })
   });
   return (
     <Grid container spacing={16}>
-      <Grid item><Input label='名称' {...name('name')} /></Grid>
-      <Grid item><Input label='玩家' {...name('player')} /></Grid>
-      <Grid item><Input label='性别' {...name('sex')} /></Grid>
-      <Grid item><Input label='居住地' {...name('residence')} /></Grid>
-      <Grid item><Input label='出生地' {...name('birthplace')} /></Grid>
-      <Grid item><Input label='时代' {...name('era')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='名称' {...name('name')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='玩家' {...name('player')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='性别' {...name('sex')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='居住地' {...name('residence')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='出生地' {...name('birthplace')} /></Grid>
+      <Grid sm={6} md={4} item><Input label='时代' {...name('era')} /></Grid>
     </Grid>
   );
 };
