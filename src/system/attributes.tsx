@@ -1,4 +1,5 @@
 import { r } from './roll';
+import { hasOwnProperty } from "tslint/lib/utils";
 export { ATTRIBUTES } from "../text/zh-Hans";
 
 export interface Attributes {
@@ -26,6 +27,18 @@ export type Characteristics = Pick<Attributes, Characteristic>
 export const characteristics: Array<keyof Characteristics> = [
   'str', 'con', 'siz', 'dex', 'app', 'int', 'pow', 'edu'
 ];
+
+
+export const characteristicsSum = (x: Partial<Characteristics>): number => {
+  let sum = 0;
+  for (let key of characteristics) {
+    if (hasOwnProperty(x, key)) {
+      const value = x[key];
+      if (value) sum += value;
+    }
+  }
+  return sum;
+};
 
 
 export const autoAttributes = (): Characteristics =>

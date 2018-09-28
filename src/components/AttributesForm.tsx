@@ -8,16 +8,16 @@ import {
   ATTRIBUTES,
   Attributes,
   autoAttributes,
+  characteristicsSum,
   computeDbBuild,
   computeHp, computeMov, computeMp,
   enhance,
   rollLuck
 } from "../system/attributes";
 import { editAttribute, logger} from "../actions";
-import { Button, Chip, createStyles, Grid, InputAdornment, Theme, withStyles } from "@material-ui/core";
+import { Button, Chip, createStyles, Grid, InputAdornment, Theme, Typography, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
-import { hasOwnProperty } from "tslint/lib/utils";
 
 
 const styles = ({spacing}: Theme) => createStyles(
@@ -31,6 +31,10 @@ const styles = ({spacing}: Theme) => createStyles(
     characteristics: {
       maxWidth: 300,
     },
+    sum: {
+      textAlign: 'center',
+      marginBottom: spacing.unit,
+    }
   }
 );
 
@@ -46,6 +50,7 @@ interface Props extends LogProps {
     point: string;
     statsChip: string;
     characteristics: string;
+    sum: string;
   }
 }
 
@@ -65,9 +70,7 @@ export class AttributesForm extends React.Component<Props, State> {
     let [luck, discardLuck] = rollLuck(isYoung);
     const next: Partial<Attributes> = {...autoAttributes(), luck};
     this.props.onEdited(next);
-    let sum = 0;
-    for (let key in next) { if (hasOwnProperty(next, key)) sum += next[key]; }
-    let info = `随机生成了属性点, 合计 ${sum} 点`;
+    let info = `随机生成了属性点, 合计 ${characteristicsSum(next)} 点`;
     if (isYoung) {
       info += `, 幸运已根据年龄调整：取 ${luck} 和 ${discardLuck} 中较大值`;
     }
@@ -167,6 +170,8 @@ export class AttributesForm extends React.Component<Props, State> {
       </Grid>
     );
 
+    const sum = characteristicsSum(this.props.attributes);
+
 
     const characteristics = (
       <Grid container spacing={8} className={this.props.classes.characteristics}>
@@ -185,6 +190,7 @@ export class AttributesForm extends React.Component<Props, State> {
           <Grid item><Number {...name("edu")} max={99}/></Grid>
           <Grid item><Number {...name("luck")} /></Grid>
         </Grid>
+        {sum ? <Grid item xs={12}><Typography variant='caption' className={this.props.classes.sum}>幸运除外合计 {sum}</Typography></Grid> : null}
       </Grid>
     );
 
