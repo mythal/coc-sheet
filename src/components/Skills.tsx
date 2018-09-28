@@ -6,13 +6,11 @@ import { Sheet } from "../system/sheet";
 import { Skill, skillList } from "../system/skills";
 import {
   Checkbox,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  createStyles,
+  createStyles, Paper, Table, TableBody, TableCell, TableHead, TableRow,
   withStyles, WithStyles
 } from "@material-ui/core";
+import SkillItem from "./SkillCard";
+import { Number } from "./controls/Number";
 
 
 
@@ -21,13 +19,11 @@ interface State {
 
 
 const styles = createStyles({
-  pointNumber: {
-    // display: 'inline-box',
-    width: '3em',
-    textAlign: 'right',
+  cellName: {
+    minWidth: '6em',
   },
-  list: {
-    columnCount: 2,
+  pointInput: {
+    width: '2em',
   }
 });
 
@@ -37,25 +33,40 @@ interface Props extends WithStyles<typeof styles> {
 
 class Skills extends React.Component<Props, State> {
 
-  skillItem = (skill: Skill, key: number) => {
+  skillItem = ({label, initial}: Skill, index: number) => {
     return (
-      <ListItem dense button key={key} className={this.props.classes.list}>
-        <span className={this.props.classes.pointNumber}>{skill.initial}</span>
-        <ListItemText>{skill.label}</ListItemText>
-        <ListItemSecondaryAction>
-          <Checkbox />
-        </ListItemSecondaryAction>
-      </ListItem>
+      <TableRow key={index}>
+        <TableCell padding='none'><Checkbox/></TableCell>
+        <TableCell padding='none' className={this.props.classes.cellName}>{label}</TableCell>
+        <TableCell padding='none'>99</TableCell>
+        <TableCell padding='none'>{initial}</TableCell>
+        <TableCell padding='none'><Number margin='none' className={this.props.classes.pointInput}/></TableCell>
+        <TableCell padding='none'><Number margin='none' className={this.props.classes.pointInput}/></TableCell>
+        <TableCell padding='none'><Number margin='none' className={this.props.classes.pointInput}/></TableCell>
+      </TableRow>
     );
   };
 
+
   render() {
+    const skillItems = skillList.map(this.skillItem);
     return (
-      <div>
-        <List>
-          {skillList.map(this.skillItem)}
-        </List>
-      </div>
+      <Paper>
+        <Table padding='dense'>
+          <TableHead>
+            <TableRow>
+              <TableCell padding='none'></TableCell>
+              <TableCell padding='none' className={this.props.classes.cellName}>名称</TableCell>
+              <TableCell padding='none'>合计</TableCell>
+              <TableCell padding='none'>初始</TableCell>
+              <TableCell padding='none'>职业</TableCell>
+              <TableCell padding='none'>兴趣</TableCell>
+              <TableCell padding='none'>成长</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{skillItems}</TableBody>
+        </Table>
+      </Paper>
     );
   }
 }
