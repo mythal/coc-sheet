@@ -12,7 +12,7 @@ import {
   ListItemIcon,
   createStyles,
   withStyles,
-  Typography, Badge, Button, TextField, Grid
+  Typography, Badge, Button, TextField, Grid, WithStyles
 } from "@material-ui/core";
 import { formatDate } from "../utils";
 import { Dispatch } from "redux";
@@ -32,14 +32,9 @@ const styles = createStyles({
 
 
 
-interface Props {
+interface Props extends WithStyles<typeof styles> {
   logs: Array<LogRecord>,
-  logger: (record: LogRecord) => void;
-  classes: {
-    root: string;
-    content: string;
-    logInput: string;
-  }
+  logger: (record: LogRecord) => void,
 }
 
 

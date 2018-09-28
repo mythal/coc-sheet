@@ -15,7 +15,17 @@ import {
   rollLuck
 } from "../system/stats";
 import { editAttribute, logger} from "../actions";
-import { Button, Chip, createStyles, Grid, InputAdornment, Theme, Typography, withStyles } from "@material-ui/core";
+import {
+  Button,
+  Chip,
+  createStyles,
+  Grid,
+  InputAdornment,
+  Theme,
+  Typography,
+  WithStyles,
+  withStyles
+} from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
 import { ageAffect, ageHint, randomAge } from "../system/age";
 
@@ -38,20 +48,10 @@ const styles = ({spacing}: Theme) => createStyles(
   }
 );
 
-
-interface LogProps {
-  logger: (record: LogRecord) => void;
-}
-
-interface Props extends LogProps {
+interface Props extends WithStyles<typeof styles> {
   attributes: Partial<Attributes>;
+  logger: (record: LogRecord) => void;
   onEdited: (next: Partial<Attributes>) => void;
-  classes: {
-    point: string;
-    statsChip: string;
-    characteristics: string;
-    sum: string;
-  }
 }
 
 

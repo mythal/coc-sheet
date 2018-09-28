@@ -3,7 +3,7 @@ import Note from './Note';
 import InformationForm from './InformationForm';
 import Attributes from "./AttributesForm";
 import Log from "./Log";
-import { createStyles, Grid, Theme, withStyles } from "@material-ui/core";
+import { createStyles, Grid, Theme, WithStyles, withStyles } from "@material-ui/core";
 import Occupations from "./OccupationForm";
 import BackstoryForm from "./BackstoryForm";
 import Skills from "./Skills";
@@ -15,7 +15,7 @@ const styles = ({spacing}: Theme) => createStyles({
   }
 });
 
-const Sheet = (props: {classes: {root: string}}) => {
+const Sheet = (props: WithStyles<typeof styles>) => {
   return (
     <Grid className={props.classes.root} container spacing={16}>
       <Grid item md={8}>
