@@ -12,6 +12,7 @@ export interface Occupation {
   skills: string;
   skillPoint: string;
   description?: string;
+  computedSkillPoint?: number;
 }
 
 

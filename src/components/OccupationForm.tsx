@@ -20,14 +20,15 @@ interface Props {
 
 
 interface State {
-  isDialogOpen: boolean
+  isDialogOpen: boolean,
+  skillPoint?: number,
 }
 
 
 class OccupationForm extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {isDialogOpen: false}
+    this.state = { isDialogOpen: false }
   }
 
   handleOpen = () => (this.setState({isDialogOpen: true}));
@@ -48,6 +49,12 @@ class OccupationForm extends React.Component<Props, State> {
         </ListItem>
       ));
     const skillPoint = computeSkillPoint(this.props.attributes, occupation.skillPoint);
+
+    // if computed skill point value changed, update
+    if (skillPoint && skillPoint !== this.state.skillPoint) {
+      this.setState({skillPoint});
+      this.props.change({...occupation, computedSkillPoint: skillPoint})
+    }
     const {int} = this.props.attributes;
     return (
       <div>
