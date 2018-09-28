@@ -6,6 +6,7 @@ import Log from "./Log";
 import { createStyles, Grid, Theme, withStyles } from "@material-ui/core";
 import Occupations from "./OccupationForm";
 import BackstoryForm from "./BackstoryForm";
+import Skills from "./Skills";
 
 
 const styles = ({spacing}: Theme) => createStyles({
@@ -20,8 +21,9 @@ const Sheet = (props: {classes: {root: string}}) => {
       <Grid item md={8}>
         <InformationForm />
         <Attributes />
-        <BackstoryForm/>
         <Occupations/>
+        <Skills/>
+        <BackstoryForm/>
         <Note />
 
       </Grid>
