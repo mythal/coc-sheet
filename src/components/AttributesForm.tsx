@@ -33,17 +33,14 @@ import { ageAffect, ageHint, randomAge } from "../system/age";
 const styles = ({spacing}: Theme) => createStyles(
   {
     point: {
-      width: '5em',
     },
     statsChip: {
       margin: spacing.unit,
     },
     characteristics: {
-      maxWidth: 300,
     },
     sum: {
-      textAlign: 'center',
-      marginBottom: spacing.unit,
+      padding: spacing.unit,
     }
   }
 );
@@ -171,26 +168,21 @@ export class AttributesForm extends React.Component<Props, State> {
     );
 
     const sum = characteristicsSum(this.props.attributes);
+    const sumText = sum ? <Typography variant='caption' className={this.props.classes.sum}>幸运除外合计 {sum}</Typography> : null;
 
 
     const characteristics = (
       <Grid container spacing={8} className={this.props.classes.characteristics}>
-        <Grid item container xs={4} direction='column' >
-          <Grid item><Number {...name("str")} max={99}/></Grid>
-          <Grid item><Number {...name("con")} max={99}/></Grid>
-          <Grid item><Number {...name("siz")} /></Grid>
-        </Grid>
-        <Grid item container xs={4} direction='column'>
-          <Grid item><Number {...name("dex")} max={99}/></Grid>
-          <Grid item><Number {...name("app")} max={99}/></Grid>
-          <Grid item><Number {...name("int")} max={99}/></Grid>
-        </Grid>
-        <Grid item container xs={4} direction='column'>
-          <Grid item><Number {...name("pow")} /></Grid>
-          <Grid item><Number {...name("edu")} max={99}/></Grid>
-          <Grid item><Number {...name("luck")} /></Grid>
-        </Grid>
-        {sum ? <Grid item xs={12}><Typography variant='caption' className={this.props.classes.sum}>幸运除外合计 {sum}</Typography></Grid> : null}
+        <Grid item><Number {...name("str")} max={99}/></Grid>
+        <Grid item><Number {...name("con")} max={99}/></Grid>
+        <Grid item><Number {...name("siz")} /></Grid>
+        <Grid item><Number {...name("dex")} max={99}/></Grid>
+        <Grid item><Number {...name("app")} max={99}/></Grid>
+        <Grid item><Number {...name("int")} max={99}/></Grid>
+        <Grid item><Number {...name("pow")} /></Grid>
+        <Grid item><Number {...name("edu")} max={99}/></Grid>
+        <Grid item><Number {...name("luck")} /></Grid>
+        {sumText}
       </Grid>
     );
 
@@ -209,15 +201,13 @@ export class AttributesForm extends React.Component<Props, State> {
     return (
       <div>
         <Grid container spacing={16}>
-          <Grid item container xs={12} alignItems='baseline' spacing={8}>
+          <Grid item container alignItems='baseline' spacing={8}>
             <Grid item><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /></Grid>
             <Grid item><Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button></Grid>
           </Grid>
-          <Grid item sm={12} md={5}>
+          <Grid item>
             {characteristics}
             {buttons}
-          </Grid>
-          <Grid item sm={12} md={7}>
             {stats}
           </Grid>
         </Grid>
