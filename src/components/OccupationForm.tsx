@@ -50,11 +50,6 @@ class OccupationForm extends React.Component<Props, State> {
       ));
     const skillPoint = computeSkillPoint(this.props.attributes, occupation.skillPoint);
 
-    // if computed skill point value changed, update
-    if (skillPoint && skillPoint !== this.state.skillPoint) {
-      this.setState({skillPoint});
-      this.props.change({...occupation, computedSkillPoint: skillPoint})
-    }
     const {int} = this.props.attributes;
     return (
       <div>
