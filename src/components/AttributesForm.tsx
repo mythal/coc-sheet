@@ -13,7 +13,7 @@ import {
   computeHp, computeMov, computeMp,
   enhance,
   rollLuck
-} from "../system/attributes";
+} from "../system/stats";
 import { editAttribute, logger} from "../actions";
 import { Button, Chip, createStyles, Grid, InputAdornment, Theme, Typography, withStyles } from "@material-ui/core";
 import { infoRecord, LogRecord, modifiedRecord } from "../system/logger";
@@ -227,7 +227,7 @@ export class AttributesForm extends React.Component<Props, State> {
 }
 
 
-const mapStateToProps = (state: Sheet) => ({ attributes: state.attributes });
+const mapStateToProps = (state: Sheet) => ({ attributes: state.stats });
 
 
 const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'onEdited' | 'logger'> => ({

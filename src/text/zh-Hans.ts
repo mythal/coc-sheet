@@ -1,8 +1,8 @@
-import { Attributes } from "../system/attributes";
+import { Stats } from "../system/stats";
 import { Normal as AgeNormal } from "../system/age";
 import { Backstory } from "../system/backstory";
 
-export const ATTRIBUTES: { [K in keyof Attributes]: string } = {
+export const ATTRIBUTES: { [K in keyof Stats]: string } = {
   age: '年龄',
   str: '力量',
   con: '体质',
@@ -17,6 +17,10 @@ export const ATTRIBUTES: { [K in keyof Attributes]: string } = {
   mp: '魔力',
   san: '理智',
   armor: '护甲',
+  dying: '濒死',
+  dead: '死亡',
+  insanityLevel: '疯狂状态',
+  majorWound: '重伤',
 };
 
 export const BACKSTORY: { [K in keyof Backstory]: string } = {

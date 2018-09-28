@@ -7,7 +7,7 @@ import { Occupation, occupations } from "../system/occupations";
 import { Button, Grid, Dialog, DialogTitle, List, ListItem, Typography } from "@material-ui/core";
 import { editOccupation, logger } from "../actions";
 import { computeSkillPoint } from "../system/interpreter";
-import { Attributes } from "../system/attributes";
+import { Attributes } from "../system/stats";
 import { infoRecord, LogRecord } from "../system/logger";
 
 
@@ -91,7 +91,7 @@ class OccupationForm extends React.Component<Props, State> {
 
 
 const mapStateToProps = (state: Sheet): Pick<Props, 'occupation' | 'attributes'> =>
-  ({occupation: state.occupation, attributes: state.attributes});
+  ({occupation: state.occupation, attributes: state.stats});
 
 
 const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'change'|'logger'> =>

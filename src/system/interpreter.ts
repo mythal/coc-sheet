@@ -1,4 +1,4 @@
-import { characteristics, Characteristics } from './attributes';
+import { characteristics, Characteristics } from './stats';
 
 
 const eatNumber = (text: string): [number, string] | null => {

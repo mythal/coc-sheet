@@ -1,4 +1,4 @@
-import { autoAttributes } from './attributes';
+import { autoAttributes } from './stats';
 import { occupationsSkillPoints } from "./occupations";
 
 

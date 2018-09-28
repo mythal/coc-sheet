@@ -11,7 +11,7 @@ import {
   SELECT_KEY_CONNECTION
 } from './constants';
 import { Information } from './system/information';
-import { Attributes } from "./system/attributes";
+import { Attributes, Stats } from "./system/stats";
 import { Backstory } from "./system/backstory";
 import { Skill } from "./system/skills";
 import { LogRecord } from "./system/logger";
@@ -36,13 +36,13 @@ export interface EditInformation {
 export const editInformation = (next: Partial<Information>): EditInformation => ({ type: EDIT_INFORMATION, next });
 
 
-export interface EditAttribute {
+export interface EditStats {
   type: typeof EDIT_ATTRIBUTE;
-  next: Partial<Attributes>;
+  next: Partial<Stats>;
 }
 
 export const editAttribute = (next: Partial<Attributes>)
-  : EditAttribute => ({ type: EDIT_ATTRIBUTE, next });
+  : EditStats => ({ type: EDIT_ATTRIBUTE, next });
 
 
 export interface EditBackstory {

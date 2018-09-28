@@ -2,8 +2,8 @@ import { r } from './roll';
 import { hasOwnProperty } from "tslint/lib/utils";
 export { ATTRIBUTES } from "../text/zh-Hans";
 
-export interface Attributes {
-  age: number;
+
+export interface Characteristics {
   str: number;
   con: number;
   siz: number;
@@ -12,17 +12,41 @@ export interface Attributes {
   int: number;
   pow: number;
   edu: number;
+}
+
+export enum InsanityLevel {
+  Normal = 0,
+  Temporary,
+  Indefinite,
+  Permanent,
+}
+
+export interface Stats extends Characteristics {
+  age: number;
   luck: number;
   hp: number;
   mp: number;
   san: number;
   armor: number;
+  dead: boolean;
+  dying: boolean;
+  majorWound: boolean;
+  insanityLevel: InsanityLevel;
 }
 
 
-export type Characteristic = 'str' | 'con' | 'siz' | 'dex' | 'app' | 'int' | 'pow' | 'edu';
+export type Numeric =
+  | keyof Characteristics
+  | 'age'
+  | 'luck'
+  | 'hp'
+  | 'mp'
+  | 'san'
+  | 'armor';
 
-export type Characteristics = Pick<Attributes, Characteristic>
+
+export type Attributes = Pick<Stats, Numeric>
+
 
 export const characteristics: Array<keyof Characteristics> = [
   'str', 'con', 'siz', 'dex', 'app', 'int', 'pow', 'edu'
@@ -74,7 +98,7 @@ export const enhance = (attr: number): {check: number, delta: number, attr: numb
 };
 
 
-export const computeDbBuild = ({ str, siz }: Pick<Attributes, 'str' | 'siz'>):
+export const computeDbBuild = ({ str, siz }: Pick<Stats, 'str' | 'siz'>):
   { db: string, build: number } | null => {
   const sum = str + siz;
   if (sum <= 64 && sum > 1) return { db: '-2', build: -2, };

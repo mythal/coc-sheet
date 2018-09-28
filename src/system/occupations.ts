@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { safeLoad } from 'js-yaml';
-import { Attributes } from './attributes';
+import { Attributes } from './stats';
 import { computeSkillPoint } from './interpreter';
 
 
