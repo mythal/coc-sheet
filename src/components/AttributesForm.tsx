@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
 import { Number, Props as NumberProps } from "./controls/Number";
 import {
-  AttributeName,
+  ATTRIBUTES,
   Attributes,
   autoAttributes,
   computeDbBuild,
@@ -83,7 +83,7 @@ export class AttributesForm extends React.Component<Props, State> {
 
 
   modifyAttribute = (key: keyof Attributes, next: number, message?: string, log_key?: string) => {
-    const display = AttributeName[key];
+    const display = ATTRIBUTES[key];
     const old = this.props.attributes[key];
     const record = modifiedRecord(log_key ? log_key : key, display, next, old, message);
     this.props.logger(record);
@@ -118,7 +118,7 @@ export class AttributesForm extends React.Component<Props, State> {
 
   fillNumberProps = (key: keyof Attributes, initial?: number, after?: number): Partial<NumberProps> => {
     const className = this.props.classes.point;
-    const display = AttributeName[key];
+    const display = ATTRIBUTES[key];
     const onEdited = (value: number) => (this.modifyAttribute(key, value));
     const attr = this.props.attributes[key];
     const value = attr === undefined ? initial : attr;

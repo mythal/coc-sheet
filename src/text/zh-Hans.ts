@@ -1,7 +1,8 @@
 import { Attributes } from "../system/attributes";
 import { Normal as AgeNormal } from "../system/age";
+import { Backstory } from "../system/backstory";
 
-export const AttributeName: { [K in keyof Attributes]: string } = {
+export const ATTRIBUTES: { [K in keyof Attributes]: string } = {
   age: '年龄',
   str: '力量',
   con: '体质',
@@ -18,6 +19,16 @@ export const AttributeName: { [K in keyof Attributes]: string } = {
   armor: '护甲',
 };
 
+export const BACKSTORY: { [K in keyof Backstory]: string } = {
+  personalDescription: '个人描述',
+  ideologyOrBeliefs: '思想/信念',
+  significantPeople: '重要之人',
+  meaningfulLocations: '意义非凡之地',
+  treasuredPossessions: '宝贵之物',
+  traits: '特质',
+  injuriesAndScars: '伤口与疤痕',
+  phobiasAndManias: '恐惧症和狂躁症',
+};
 
 export const AGE_OUT_OF_RANGE = '超出可选范围，请与守密人协商。';
 
@@ -110,3 +121,4 @@ export const TRAITS = [
   '好名声。(例如，村里最好的饭后聊天人士，虔信圣徒，不惧任何危险)',
   '雄心壮志。(例如，梦想远大，目标是成为 BOSS，渴求一切)',
 ];
+

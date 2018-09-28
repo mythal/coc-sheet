@@ -6,6 +6,7 @@ import {
   SIGNIFICANT_PEOPLE_WHY, TRAITS,
   TREASURED_POSSESSIONS
 } from "../text/zh-Hans";
+export {BACKSTORY} from "../text/zh-Hans";
 
 
 export interface Backstory {
@@ -15,6 +16,8 @@ export interface Backstory {
   meaningfulLocations: string;
   treasuredPossessions: string;
   traits: string;
+  injuriesAndScars: string;
+  phobiasAndManias: string;
 }
 
 

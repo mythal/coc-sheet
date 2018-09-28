@@ -1,5 +1,5 @@
 import { r } from './roll';
-export { AttributeName } from "../text/zh-Hans";
+export { ATTRIBUTES } from "../text/zh-Hans";
 
 export interface Attributes {
   age: number;
