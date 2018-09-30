@@ -21,9 +21,9 @@ const Sheet = (props: WithStyles<typeof styles>) => {
       <Grid item md={8} lg={9} xl={10}>
         <InformationForm />
         <Attributes />
-        <Occupations/>
-        <Skills/>
-        <BackstoryForm/>
+        <Occupations />
+        <Skills />
+        <BackstoryForm />
         <Note />
       </Grid>
       <Grid item md={4} lg={3} xl={2}>

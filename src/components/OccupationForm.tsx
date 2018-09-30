@@ -4,14 +4,39 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
 import { Occupation, occupations } from "../system/occupations";
-import { Button, Grid, Dialog, DialogTitle, List, ListItem, Typography } from "@material-ui/core";
+import {
+  IconButton,
+  Button,
+  Grid,
+  Dialog,
+  DialogTitle,
+  List,
+  ListItem,
+  Typography,
+  Icon,
+  Table, TableHead, TableRow, TableCell, TableBody, Paper, createStyles, Theme, WithStyles, withStyles
+} from "@material-ui/core";
 import { editOccupation, logger } from "../actions";
 import { computeSkillPoint } from "../system/interpreter";
 import { Attributes } from "../system/stats";
 import { infoRecord, LogRecord } from "../system/logger";
 
 
-interface Props {
+
+const styles = ({spacing}: Theme) => createStyles({
+  paper: {
+    // maxWidth: 500,
+  },
+  header: {
+    margin: spacing.unit,
+  },
+  skills: {
+    padding: spacing.unit * 2,
+  }
+});
+
+
+interface Props extends WithStyles<typeof styles> {
   occupation: Occupation;
   change: (occupation: Occupation) => void;
   attributes: Partial<Attributes>;
@@ -41,7 +66,7 @@ class OccupationForm extends React.Component<Props, State> {
   };
 
   render() {
-    const occupation = this.props.occupation;
+    const {occupation, classes} = this.props;
     const occupationList = occupations
       .map((x, i) => (
         <ListItem key={i} onClick={() => this.handleSelect(i)} button>
@@ -61,24 +86,33 @@ class OccupationForm extends React.Component<Props, State> {
             </List>
           </div>
         </Dialog>
-        <Grid container spacing={8} direction='column'>
-          <Grid item>
-            <Grid container spacing={16} alignItems='center' justify='space-between'>
-              <Grid item><Typography variant='title'>{occupation.name}</Typography></Grid>
-              <Grid item><Button variant='contained' onClick={this.handleOpen}>选择你的职业</Button></Grid>
+        <Paper className={classes.paper}>
+          <Grid container spacing={0} direction='column'>
+            <Grid item className={classes.header}>
+              <Grid container spacing={16} alignItems='center'>
+                <Grid item><Button variant='outlined' onClick={this.handleOpen} size='large'>{occupation.name}</Button></Grid>
+                <Grid item><IconButton onClick={this.handleOpen}><Icon fontSize='inherit'>work</Icon></IconButton></Grid>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item><Typography>{occupation.skills}</Typography></Grid>
+            <Grid item className={classes.skills}><Typography><strong>本职技能</strong> {occupation.skills}</Typography></Grid>
 
-          <Grid item>
-            <Grid container spacing={16}>
-              <Grid item><Typography>信用评级范围 {occupation.credit[0]} - {occupation.credit[1]}</Typography></Grid>
-              <Grid item><Typography>本职技能点 {skillPoint ? skillPoint : '??'}</Typography></Grid>
-              <Grid item><Typography>兴趣技能点 {int ? int * 2 : '??'}</Typography></Grid>
+            <Grid item>
+              <Table>
+                <TableHead><TableRow>
+                  <TableCell>信用评级范围</TableCell>
+                  <TableCell>本职技能点</TableCell>
+                  <TableCell>兴趣技能点</TableCell>
+                </TableRow></TableHead>
+                <TableBody><TableRow>
+                  <TableCell>{occupation.credit[0]} - {occupation.credit[1]}</TableCell>
+                  <TableCell>{skillPoint ? skillPoint : '??'}</TableCell>
+                  <TableCell>{int ? int * 2 : '??'}</TableCell>
+                </TableRow></TableBody>
+              </Table>
             </Grid>
-          </Grid>
 
-        </Grid>
+          </Grid>
+        </Paper>
       </div>
     );
   }
@@ -93,4 +127,4 @@ const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'change'|'logger'> 
   ({change: x => dispatch(editOccupation(x)), logger: record => dispatch(logger(record))});
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(OccupationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(OccupationForm));
