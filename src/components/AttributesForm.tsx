@@ -19,7 +19,7 @@ import {
   Button,
   Chip,
   createStyles,
-  Grid,
+  Grid, Icon, IconButton,
   InputAdornment,
   Theme,
   Typography,
@@ -161,7 +161,7 @@ export class AttributesForm extends React.Component<Props, State> {
 
     const buttons = (
       <Grid container spacing={8}>
-        <Grid item><Button variant='contained' color='secondary' onClick={() => this.generate()} >随机属性</Button></Grid>
+        <Grid item><Button variant='contained' color='secondary' onClick={() => this.generate()} ><Icon>casino</Icon> 随机属性</Button></Grid>
         <Grid item><Button variant='contained' onClick={this.doEduEnhance} disabled={edu === undefined} >教育增强</Button></Grid>
         <Grid item><Button variant='contained' disabled={luck === undefined} onClick={this.doLuckEnhance}>幸运增强</Button></Grid>
       </Grid>
@@ -203,7 +203,7 @@ export class AttributesForm extends React.Component<Props, State> {
         <Grid container spacing={16}>
           <Grid item container alignItems='baseline' spacing={8}>
             <Grid item><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /></Grid>
-            <Grid item><Button onClick={() => this.changeAge()} variant='contained'>随机年龄</Button></Grid>
+            <Grid item><IconButton onClick={() => this.changeAge()}><Icon>casino</Icon></IconButton></Grid>
           </Grid>
           <Grid item>
             {characteristics}
