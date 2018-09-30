@@ -7,6 +7,7 @@ import { stats } from "./stats";
 import { backstory } from "./backstory";
 import { logs } from "./logs";
 import { occupation } from "./occupation";
+import { skills } from "./skills";
 
 
 function note(state: string = '', action: EditNote) {
@@ -18,5 +19,5 @@ function note(state: string = '', action: EditNote) {
 
 
 export const sheet = combineReducers<Sheet>(
-  { note, information, stats, backstory, logs, occupation }
+  { note, information, stats, backstory, logs, occupation, skills }
 );

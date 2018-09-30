@@ -3,12 +3,13 @@ import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
-import { Skill, skillList } from "../system/skills";
+import { Skill } from "../system/skills";
 import {
   createStyles, FormControlLabel, Grid, Switch,
   withStyles, WithStyles
 } from "@material-ui/core";
 import SkillCard from "./SkillCard";
+import { editSkills } from "../actions";
 
 
 
@@ -27,13 +28,20 @@ const styles = createStyles({
 });
 
 interface Props extends WithStyles<typeof styles> {
+  skills: Array<Skill>;
+  editSkills: (skills: Array<Skill>) => void;
 }
 
 
 class Skills extends React.Component<Props, State> {
 
   skillItem = (skill: Skill, index: number) => {
-    return (<SkillCard key={index} isEditing={this.state.isEditing} skill={skill}/>);
+    const edit = (index: number) => (skill: Skill) => {
+      let nextSkills = [...this.props.skills];
+      nextSkills[index] = skill;
+      this.props.editSkills(nextSkills);
+    };
+    return (<SkillCard key={index} isEditing={this.state.isEditing} skill={skill} edit={edit(index)} />);
   };
 
   constructor(props: Props) {
@@ -44,7 +52,8 @@ class Skills extends React.Component<Props, State> {
   switchEdit = () => this.setState({isEditing: !this.state.isEditing});
 
   render() {
-    const skillItems = skillList.map(this.skillItem);
+    const {skills} = this.props;
+    const skillItems = skills ? this.props.skills.map(this.skillItem) : [];
     const editSwitch = (
       <FormControlLabel
         control={<Switch checked={this.state.isEditing} onChange={this.switchEdit}/>}
@@ -60,10 +69,11 @@ class Skills extends React.Component<Props, State> {
 }
 
 
-const mapStateToProps = (state: Sheet): Partial<Props> => ({});
+const mapStateToProps = (state: Sheet): Pick<Props, 'skills'> => ({skills: state.skills});
 
 
-const mapDispatchToProps = (dispatch: Dispatch): Partial<Props> => ({});
+const mapDispatchToProps = (dispatch: Dispatch): Pick<Props, 'editSkills'> =>
+  ({editSkills: next => dispatch(editSkills(next))});
 
 
 export default  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Skills));

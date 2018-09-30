@@ -5,7 +5,7 @@ import {
   EDIT_BACKSTORY,
   EDIT_INFORMATION,
   EDIT_NOTE, EDIT_OCCUPATION,
-  EDIT_SKILL,
+  EDIT_SKILLS,
   LOG,
   RECOVER_LUCK,
   SELECT_KEY_CONNECTION
@@ -93,13 +93,13 @@ export function recoverLuck(luck: number): RecoverLuck {
   return { type: RECOVER_LUCK, luck };
 }
 
-export interface EditSkill {
-  type: typeof EDIT_SKILL;
-  skill: Skill;
+export interface EditSkills {
+  type: typeof EDIT_SKILLS;
+  skills: Array<Skill>;
 }
 
 
-export const editSkill = (skill: Skill): EditSkill => ({ type: EDIT_SKILL, skill });
+export const editSkills = (skills: Array<Skill>): EditSkills => ({ type: EDIT_SKILLS, skills });
 
 
 

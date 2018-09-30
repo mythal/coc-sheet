@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import SkillCard from "./SkillCard";
 import { Input } from "./controls/Input";
+import { Number } from "./controls/Number";
 
 
 const styles = ({spacing}: Theme) => createStyles({
@@ -31,6 +32,7 @@ const styles = ({spacing}: Theme) => createStyles({
 
 interface Props extends WithStyles<typeof styles> {
   skill: Skill;
+  edit: (skill: Skill) => void;
   isEditing: boolean;
 }
 
@@ -38,13 +40,15 @@ interface Props extends WithStyles<typeof styles> {
 interface State {
   isExpand: boolean;
   isCreating: boolean;
+  label: string;
+  initial?: number;
 }
 
 
 class SuperSkill extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {isExpand: false, isCreating: false}
+    this.state = {isExpand: false, isCreating: false, label: ''}
   }
 
   handleExpand = () => this.setState({isExpand: !this.state.isExpand});
@@ -77,12 +81,21 @@ class SuperSkill extends React.Component<Props, State> {
     );
   }
 
-  creatingCard() {
+  handleCreate = () => {
+    const {label, initial} = this.state;
+    this.setState({label: '', initial: undefined});
+    const {skill} = this.props;
+    const newSkill: Skill = {label, initial, name: ''};
+    let contains = [newSkill].concat(skill.contains as Array<Skill>);
+    this.props.edit({...skill, contains})
+  };
 
+  creatingCard() {
+    const {label, initial} = this.state;
     const createFields = (
       <Grid container spacing={8}>
-        <Grid item xs={8}><Input fullWidth label='名称'/></Grid>
-        <Grid item xs={4}><Input fullWidth label='初始值'/></Grid>
+        <Grid item xs={8}><Input value={label} onEdited={label => this.setState({label})} fullWidth label='名称'/></Grid>
+        <Grid item xs={4}><Number value={initial} onEdited={initial => this.setState({initial})} fullWidth label='初始值'/></Grid>
       </Grid>
     );
     return (
@@ -91,11 +104,20 @@ class SuperSkill extends React.Component<Props, State> {
         <CardContent>{createFields}</CardContent>
         <CardActions>
           <Button className={this.props.classes.leftAction} onClick={this.cancelAdd}>取消</Button>
-          <Button>确定</Button>
+          <Button onClick={this.handleCreate}>确定</Button>
         </CardActions>
       </>
     );
   }
+
+  skillItem = (skill: Skill, index: number) => {
+    const edit = (i: number) => (skill: Skill) => {
+      let contains = [...skill.contains as Array<Skill>];
+      contains[i] = skill;
+      this.props.edit({...skill, contains});
+    };
+    return <SkillCard isEditing={this.props.isEditing} edit={edit(index)} skill={skill} key={index}/>;
+  };
 
   render() {
     const skills = this.props.skill.contains;
@@ -112,15 +134,15 @@ class SuperSkill extends React.Component<Props, State> {
       <>
 
         <Grid xs={12} sm={6} md={4} lg={3} xl={2} item>
-
           <Card className={this.props.classes.card}>
             { isCreating ? this.creatingCard() : this.card() }
           </Card>
         </Grid>
+
         <Slide direction='right' mountOnEnter unmountOnExit in={this.state.isExpand}>
           <>
           <Grid container item spacing={8} className={this.props.classes.subSkills}>
-            {skills.map((skill, number) => <SkillCard isEditing={this.props.isEditing} skill={skill} key={number}/>)}
+            {skills.map(this.skillItem)}
           </Grid>
           </>
         </Slide>

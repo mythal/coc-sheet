@@ -3,6 +3,7 @@ import { Backstory } from "./backstory";
 import { Information } from "./information";
 import { LogRecord } from "./logger";
 import { Occupation } from "./occupations";
+import { Skill } from "./skills";
 
 export interface Sheet {
   note: string;
@@ -11,4 +12,5 @@ export interface Sheet {
   backstory: Backstory;
   occupation: Occupation;
   logs: Array<LogRecord>;
+  skills: Array<Skill>;
 }

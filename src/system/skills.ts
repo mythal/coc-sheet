@@ -15,13 +15,5 @@ export interface Skill {
   deletable?: boolean;
 }
 
-export const skillList = (safeLoad(skillData) as Array<Skill>)
+export const skillList: Array<Skill> = (safeLoad(skillData) as Array<Skill>)
   .sort((a, b) => a.name.localeCompare(b.name));
-
-export const skillMap: {[key: string]: Skill} = (() => {
-  let map = {};
-  for (let skill of skillList) {
-    map[skill.name] = skill;
-  }
-  return map;
-})();

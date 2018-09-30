@@ -29,7 +29,7 @@ export const RECOVER_LUCK = 'RECOVER_LUCK'; // P99
 // Skill
 export const SET_SKILL_LIMIT = 'SET_SKILL_LIMIT';
 export const ADD_SKILL = 'ADD_SKILL';
-export const EDIT_SKILL = 'EDIT_SKILL';
+export const EDIT_SKILLS = 'EDIT_SKILLS';
 export const REMOVE_SKILL = 'REMOVE_SKILL';
 export const SKILL_FILTER = 'SKILL_FILTER';
 // export const CHANGE_CTHULHU_MYTHOS = 'CHANGE_CTHULHU_MYTHOS';
