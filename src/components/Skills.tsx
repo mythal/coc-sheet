@@ -46,7 +46,9 @@ class Skills extends React.Component<Props, State> {
   render() {
     const skillItems = skillList.map(this.skillItem);
     const editSwitch = (
-      <FormControlLabel control={<Switch checked={this.state.isEditing} onChange={this.switchEdit}/>} label="编辑技能"/>
+      <FormControlLabel
+        control={<Switch checked={this.state.isEditing} onChange={this.switchEdit}/>}
+        label="编辑技能"/>
     );
     return (
       <div>

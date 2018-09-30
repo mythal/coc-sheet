@@ -7,15 +7,14 @@ import {
   CardContent,
   CardHeader, Checkbox,
   createStyles, Grid,
-  Theme,
   withStyles,
   WithStyles,
-  Select, MenuItem, IconButton, Icon, Collapse
+  IconButton, Icon, Collapse
 } from "@material-ui/core";
 import SuperSkill from "./SuperSkill";
 
 
-const styles = ({spacing}: Theme) => createStyles({
+const styles = createStyles({
   root: {
   },
   card: {
@@ -44,20 +43,24 @@ interface State {
 
 
 class SkillCard extends React.Component<Props, State> {
-  select(contains: Array<Skill>) {
-    const items = contains.map((skill, index) => <MenuItem key={index} value={index}>{skill.label}</MenuItem>);
-    return (
-      <Select value='' displayEmpty>
-        <MenuItem  value=""  disabled>选择技能分支</MenuItem>
-        <MenuItem  value="custom">自定义</MenuItem>
-        {items}
-      </Select>
-    )
+
+  title() {
+    const {tag, label} = this.props.skill;
+    const icons = [];
+
+    if (tag !== undefined) {
+      if (tag.find(x => x === 'modern'))
+        icons.push(<span title='现代'><Icon fontSize='inherit'>business</Icon></span>);
+
+      if (tag.find(x => x === 'irregular'))
+        icons.push(<span title='非常规'><Icon fontSize='inherit'>star_half</Icon></span>);
+    }
+    return <><span>{label}</span> {icons}</>
   }
 
   render() {
     const {classes, isEditing, skill} = this.props;
-    const {label, name, initial, contains, deletable} = this.props.skill;
+    const {name, initial, contains, deletable} = this.props.skill;
     if (contains !== undefined && contains.length > 0)
       return <SuperSkill skill={skill} isEditing={isEditing}/>;
     const editFields = (
@@ -83,7 +86,7 @@ class SkillCard extends React.Component<Props, State> {
       <>
         <Grid xs={12} sm={6} md={4} lg={3} xl={2} item className={classes.root}>
           <Card className={classes.card}>
-            <CardHeader avatar={<Avatar>{String(initial)}</Avatar>} title={label} subheader={name} action={action}/>
+            <CardHeader avatar={<Avatar>{String(initial)}</Avatar>} title={this.title()} subheader={name} action={action}/>
             {editFields}
           </Card>
         </Grid>
