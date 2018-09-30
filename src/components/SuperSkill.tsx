@@ -83,7 +83,6 @@ class SuperSkill extends React.Component<Props, State> {
 
   handleCreate = () => {
     const {label, initial} = this.state;
-    this.setState({label: '', initial: undefined});
     const {skill} = this.props;
     const newSkill: Skill = {label, initial, name: ''};
     let contains = [newSkill].concat(skill.contains as Array<Skill>);
@@ -112,7 +111,7 @@ class SuperSkill extends React.Component<Props, State> {
 
   skillItem = (skill: Skill, index: number) => {
     const edit = (i: number) => (skill: Skill) => {
-      let contains = [...skill.contains as Array<Skill>];
+      let contains = [...this.props.skill.contains as Array<Skill>];
       contains[i] = skill;
       this.props.edit({...skill, contains});
     };
