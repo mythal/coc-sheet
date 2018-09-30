@@ -49,11 +49,12 @@ class SkillCard extends React.Component<Props, State> {
     const icons = [];
 
     if (tag !== undefined) {
+      let key = 0;
       if (tag.find(x => x === 'modern'))
-        icons.push(<span title='现代'><Icon fontSize='inherit'>business</Icon></span>);
+        icons.push(<span key={++key} title='现代'><Icon fontSize='inherit'>business</Icon></span>);
 
       if (tag.find(x => x === 'irregular'))
-        icons.push(<span title='非常规'><Icon fontSize='inherit'>star_half</Icon></span>);
+        icons.push(<span key={++key} title='非常规'><Icon fontSize='inherit'>star_half</Icon></span>);
     }
     return <><span>{label}</span> {icons}</>
   }
