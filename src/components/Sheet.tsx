@@ -18,17 +18,17 @@ const styles = ({spacing}: Theme) => createStyles({
 const Sheet = (props: WithStyles<typeof styles>) => {
   return (
     <Grid className={props.classes.root} container spacing={16}>
-      {/*<Grid item md={8}>*/}
-        {/*<InformationForm />*/}
-        {/*<Attributes />*/}
-        {/*<Occupations/>*/}
+      <Grid item md={8} lg={9} xl={10}>
+        <InformationForm />
+        <Attributes />
+        <Occupations/>
         <Skills/>
-        {/*<BackstoryForm/>*/}
-        {/*<Note />*/}
-      {/*</Grid>*/}
-      {/*<Grid item md={4}>*/}
-        {/*<Log />*/}
-      {/*</Grid>*/}
+        <BackstoryForm/>
+        <Note />
+      </Grid>
+      <Grid item md={4} lg={3} xl={2}>
+        <Log />
+      </Grid>
 
     </Grid>
   );

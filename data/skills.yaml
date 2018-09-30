@@ -296,36 +296,19 @@
   - label: 汉语
     name: Chinese
     initial: 1
+    deletable: true
   - label: 英语
     name: English
     initial: 1
+    deletable: true
   - label: 日语
     name: Japanese
     initial: 1
-  - label: 西班牙语
-    name: Spanish
-    initial: 1
-  - label: 法语
-    name: French
-    initial: 1
-  - label: 俄语
-    name: Russian
-    initial: 1
-  - label: 阿拉伯语
-    name: Arabic
-    initial: 1
-  - label: 韩语
-    name: Korean
-    initial: 1
-  - label: 德语
-    name: German
-    initial: 1
-  - label: 希腊语
-    name: Greek
-    initial: 1
+    deletable: true
   - label: 拉丁语
     name: Latin
     initial: 1
+    deletable: true
 - label: 母语
   name: Language (Own)
   initial: EDU

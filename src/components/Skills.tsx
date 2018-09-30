@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
 import { Skill, skillList } from "../system/skills";
 import {
-  createStyles, FormControlLabel, Switch,
+  createStyles, FormControlLabel, Grid, Switch,
   withStyles, WithStyles
 } from "@material-ui/core";
 import SkillCard from "./SkillCard";
@@ -38,7 +38,7 @@ class Skills extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {isEditing: false};
+    this.state = {isEditing: true};
   }
 
   switchEdit = () => this.setState({isEditing: !this.state.isEditing});
@@ -51,7 +51,7 @@ class Skills extends React.Component<Props, State> {
     return (
       <div>
         <div>{editSwitch}</div>
-        <div>{skillItems}</div>
+        <Grid container spacing={8}>{skillItems}</Grid>
       </div>
     );
   }

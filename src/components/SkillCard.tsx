@@ -9,27 +9,27 @@ import {
   createStyles, Grid,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
+  Select, MenuItem, IconButton, Icon, Collapse
 } from "@material-ui/core";
+import SuperSkill from "./SuperSkill";
 
 
 const styles = ({spacing}: Theme) => createStyles({
   root: {
-    display: 'inline-block',
-    position: 'relative',
-    margin: spacing.unit,
   },
   card: {
-    width: 240,
   },
   pointInput: {
-    // width: '4em',
   },
   nonEdit: {
     display: 'none',
   },
   Editing: {
   },
+  superSkill: {
+  },
+  delete: {margin: '0 0 0 auto'},
 });
 
 
@@ -44,26 +44,50 @@ interface State {
 
 
 class SkillCard extends React.Component<Props, State> {
-  render() {
-    const classes = this.props.classes;
-    const {label, name, initial} = this.props.skill;
-    const editFields = (
-      <CardContent className={this.props.isEditing ? classes.Editing : classes.nonEdit}>
-        <Grid container spacing={8}>
-          <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='职业'/></Grid>
-          <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='兴趣'/></Grid>
-          <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='成长'/></Grid>
-        </Grid>
-      </CardContent>
-    );
+  select(contains: Array<Skill>) {
+    const items = contains.map((skill, index) => <MenuItem key={index} value={index}>{skill.label}</MenuItem>);
     return (
-      <div className={classes.root}>
-        <Card className={classes.card}>
-          <CardHeader avatar={<Avatar>{String(initial)}</Avatar>} title={label} subheader={name} action={<Checkbox/>}/>
-          {editFields}
-        </Card>
+      <Select value='' displayEmpty>
+        <MenuItem  value=""  disabled>选择技能分支</MenuItem>
+        <MenuItem  value="custom">自定义</MenuItem>
+        {items}
+      </Select>
+    )
+  }
 
-      </div>
+  render() {
+    const {classes, isEditing, skill} = this.props;
+    const {label, name, initial, contains, deletable} = this.props.skill;
+    if (contains !== undefined && contains.length > 0)
+      return <SuperSkill skill={skill} isEditing={isEditing}/>;
+    const editFields = (
+      <Collapse in={isEditing}>
+        <>
+          <CardContent className={classes.Editing}>
+            <Grid container spacing={8}>
+              <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='职业'/></Grid>
+              <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='兴趣'/></Grid>
+              <Grid xs={4} item><Number margin='none' fullWidth className={classes.pointInput} label='成长'/></Grid>
+            </Grid>
+          </CardContent>
+        </>
+      </Collapse>
+    );
+
+    let action = null;
+    if (isEditing) {
+      if (deletable) action = <IconButton className={classes.delete}><Icon>delete_forever</Icon></IconButton>;
+    }
+    else action = <IconButton className={classes.delete}><Checkbox/></IconButton>;
+    return (
+      <>
+        <Grid xs={12} sm={6} md={4} lg={3} xl={2} item className={classes.root}>
+          <Card className={classes.card}>
+            <CardHeader avatar={<Avatar>{String(initial)}</Avatar>} title={label} subheader={name} action={action}/>
+            {editFields}
+          </Card>
+        </Grid>
+      </>
     );
   }
 }

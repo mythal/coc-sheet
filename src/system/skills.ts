@@ -6,9 +6,10 @@ const skillData = readFileSync('./data/skills.yaml', 'utf-8');
 export interface Skill {
   label: string;
   name: string;
-  initial: number | string;
+  initial: number | string | undefined;
   contains?: Array<Skill>;
   tag?: Array<string>;
+  deletable?: boolean;
 }
 
 export const skillList = (safeLoad(skillData) as Array<Skill>)
