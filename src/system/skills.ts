@@ -7,6 +7,9 @@ export interface Skill {
   label: string;
   name: string;
   initial: number | string | undefined;
+  occupation?: number;
+  interest?: number;
+  growth?: number;
   contains?: Array<Skill>;
   tag?: Array<string>;
   deletable?: boolean;
