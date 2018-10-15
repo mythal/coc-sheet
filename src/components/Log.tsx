@@ -137,7 +137,7 @@ class Log extends React.Component<Props, State> {
       .slice(0, currentSize);
     return (
       <div>
-        <Grid container justify='space-around' alignItems='baseline'>
+        <Grid container justify='space-around' alignItems='flex-end'>
           <Grid item>
             <TextField value={this.state.current}
                        label='日志'

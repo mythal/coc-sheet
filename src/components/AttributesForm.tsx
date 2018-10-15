@@ -201,7 +201,7 @@ export class AttributesForm extends React.Component<Props, State> {
     return (
       <div>
         <Grid container spacing={16}>
-          <Grid item container alignItems='baseline' spacing={8}>
+          <Grid item container alignItems='flex-end' spacing={8}>
             <Grid item><Number label="年龄" className={pointClass} value={age} onEdited={this.changeAge} /></Grid>
             <Grid item><IconButton onClick={() => this.changeAge()}><Icon>casino</Icon></IconButton></Grid>
           </Grid>
