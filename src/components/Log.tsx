@@ -44,7 +44,7 @@ interface State {
 }
 
 
-const NUM = 10;
+const NUM = 20;
 
 
 class Log extends React.Component<Props, State> {
