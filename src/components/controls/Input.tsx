@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react';
 import { INPUT_DELAY } from '../../constants';
 import Timer = NodeJS.Timer;
 import { TextField } from '@material-ui/core';
-import { TextFieldProps } from '@material-ui/core/TextField';
+import { StandardTextFieldProps } from '@material-ui/core/TextField';
 
 
 interface State {
@@ -13,7 +13,7 @@ interface State {
 }
 
 
-export interface Props extends TextFieldProps {
+export interface Props extends StandardTextFieldProps {
   // when user finished a input action.
   onEdited?: (value: string) => void;
   value?: string;

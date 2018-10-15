@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Input } from './Input';
-import { TextFieldProps } from "@material-ui/core/TextField";
+import { StandardTextFieldProps } from "@material-ui/core/TextField";
 
-export interface Props extends TextFieldProps {
+export interface Props extends StandardTextFieldProps {
   value?: number;
   afterAdornmentText?: string;
   onEdited?: (x: number) => void;

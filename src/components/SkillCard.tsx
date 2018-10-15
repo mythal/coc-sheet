@@ -42,6 +42,7 @@ interface Props extends WithStyles<typeof styles>{
   skill: Skill,
   isEditing: boolean,
   edit: (skill: Skill) => void;
+  remove: () => void;
 }
 
 
@@ -115,7 +116,9 @@ class SkillCard extends React.Component<Props, State> {
 
     let action = null;
     if (isEditing) {
-      if (deletable) action = <IconButton className={classes.delete}><Icon>delete_forever</Icon></IconButton>;
+      if (deletable) {
+        action = (<IconButton className={classes.delete} onClick={this.props.remove}><Icon>delete_forever</Icon></IconButton>);
+      }
     }
     else action = <IconButton className={classes.delete}><Checkbox/></IconButton>;
     return (

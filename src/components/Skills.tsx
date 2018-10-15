@@ -41,7 +41,20 @@ class Skills extends React.Component<Props, State> {
       nextSkills[index] = skill;
       this.props.editSkills(nextSkills);
     };
-    return (<SkillCard key={index} isEditing={this.state.isEditing} skill={skill} edit={edit(index)} />);
+
+    const remove = (index: number) => () => {
+      let nextSkills = this.props.skills.filter((_, i) => i !== index);
+      this.props.editSkills(nextSkills);
+    };
+
+    return (
+      <SkillCard
+        key={index}
+        isEditing={this.state.isEditing}
+        skill={skill}
+        edit={edit(index)}
+        remove={remove(index)} />
+    );
   };
 
   constructor(props: Props) {

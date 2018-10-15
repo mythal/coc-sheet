@@ -84,8 +84,9 @@ class SuperSkill extends React.Component<Props, State> {
   handleCreate = () => {
     const {label, initial} = this.state;
     const {skill} = this.props;
-    const newSkill: Skill = {label, initial, name: ''};
+    const newSkill: Skill = {label, initial, name: '', deletable: true};
     let contains = [newSkill].concat(skill.contains as Array<Skill>);
+    this.setState({isCreating: false, label: '', initial: undefined});
     this.props.edit({...skill, contains})
   };
 
@@ -110,12 +111,16 @@ class SuperSkill extends React.Component<Props, State> {
   }
 
   skillItem = (skill: Skill, index: number) => {
-    const edit = (i: number) => (skill: Skill) => {
-      let contains = [...this.props.skill.contains as Array<Skill>];
-      contains[i] = skill;
+    const skills = this.props.skill.contains as Array<Skill>;
+    const edit = (skill: Skill) => {
+      let contains = [...skills];
+      contains[index] = skill;
       this.props.edit({...skill, contains});
     };
-    return <SkillCard isEditing={this.props.isEditing} edit={edit(index)} skill={skill} key={index}/>;
+    const remove = () => {
+      this.props.edit({...skill, contains: skills.filter((_, i) => i !== index)});
+    };
+    return <SkillCard isEditing={this.props.isEditing} edit={edit} skill={skill} key={index} remove={remove}/>;
   };
 
   render() {
