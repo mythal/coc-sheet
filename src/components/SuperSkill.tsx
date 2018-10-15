@@ -118,7 +118,7 @@ class SuperSkill extends React.Component<Props, State> {
       this.props.edit({...skill, contains});
     };
     const remove = () => {
-      this.props.edit({...skill, contains: skills.filter((_, i) => i !== index)});
+      this.props.edit({...this.props.skill, contains: skills.filter((_, i) => i !== index)});
     };
     return <SkillCard isEditing={this.props.isEditing} edit={edit} skill={skill} key={index} remove={remove}/>;
   };
