@@ -19,12 +19,12 @@ const Sheet = (props: WithStyles<typeof styles>) => {
   return (
     <Grid className={props.classes.root} container>
       <Grid item md={8} lg={9} xl={10}>
-        <InformationForm />
-        <Attributes />
-        <Occupations />
+        {/*<InformationForm />*/}
+        {/*<Attributes />*/}
+        {/*<Occupations />*/}
         <Skills />
-        <BackstoryForm />
-        <Note />
+        {/*<BackstoryForm />*/}
+        {/*<Note />*/}
       </Grid>
       <Grid item md={4} lg={3} xl={2}>
         <Log />
