@@ -17,7 +17,7 @@ const styles = ({spacing}: Theme) => createStyles({
 
 const Sheet = (props: WithStyles<typeof styles>) => {
   return (
-    <Grid className={props.classes.root} container spacing={16}>
+    <Grid className={props.classes.root} container>
       <Grid item md={8} lg={9} xl={10}>
         <InformationForm />
         <Attributes />
