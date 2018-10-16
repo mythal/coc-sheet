@@ -86,7 +86,7 @@ class SuperSkill extends React.Component<Props, State> {
     const {skill} = this.props;
     const newSkill: Skill = {label, initial, name: '', deletable: true};
     let contains = [newSkill].concat(skill.contains as Array<Skill>);
-    this.setState({isCreating: false, label: '', initial: undefined});
+    // this.setState({isCreating: false, label: '', initial: undefined});
     this.props.edit({...skill, contains})
   };
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Sheet } from "../system/sheet";
 import { Skill } from "../system/skills";
 import {
-  createStyles, FormControlLabel, Grid, Switch,
+  createStyles, FormControlLabel, Grid, Switch, Typography,
   withStyles, WithStyles
 } from "@material-ui/core";
 import SkillCard from "./SkillCard";
@@ -24,7 +24,13 @@ const styles = createStyles({
   },
   pointInput: {
     width: '2em',
-  }
+  },
+  section: {
+    // marginTop: '2em',
+  },
+  sectionTitle: {
+    margin: '0.4em 0',
+  },
 });
 
 interface Props extends WithStyles<typeof styles> {
@@ -35,27 +41,50 @@ interface Props extends WithStyles<typeof styles> {
 
 class Skills extends React.Component<Props, State> {
 
-  skillItem = (skill: Skill, index: number) => {
-    const edit = (index: number) => (skill: Skill) => {
-      let nextSkills = [...this.props.skills];
-      nextSkills[index] = skill;
-      this.props.editSkills(nextSkills);
+  sections = (section: Skill, sectionKey: number) => {
+    if (section.contains === undefined) {
+      console.log(section);
+      return null;
+    }
+    const {classes, skills} = this.props;
+
+    const editSection = (next: Skill) => {
+      let nextSections = [...skills];
+      nextSections[sectionKey] = next;
+      this.props.editSkills(nextSections);
     };
 
-    const remove = (index: number) => () => {
-      let nextSkills = this.props.skills.filter((_, i) => i !== index);
-      this.props.editSkills(nextSkills);
+
+    const remove = (key: number) => () => {
+      const contains = (section.contains as Array<Skill>).filter((_, i) => i !== key);
+      editSection({...section, contains});
     };
+
+    const editSkill = (key: number) => (skill: Skill) => {
+      let nextSection = {...section};
+      if (nextSection.contains === undefined) {
+        console.log(nextSection);
+        return;
+      }
+      nextSection.contains[key] = skill;
+      editSection(nextSection);
+    };
+
+
+    const skillItem = section.contains.map((skill: Skill, key: number) => {
+      return (<SkillCard key={key} remove={remove(key)} skill={skill} edit={editSkill(key)} isEditing={this.state.isEditing}/>);
+    });
 
     return (
-      <SkillCard
-        key={index}
-        isEditing={this.state.isEditing}
-        skill={skill}
-        edit={edit(index)}
-        remove={remove(index)} />
-    );
+      <div className={classes.section} key={sectionKey}>
+        <div className={classes.sectionTitle}>
+          <Typography  variant='subtitle1'>{section.label}</Typography>
+        </div>
+        <Grid container spacing={8}>{skillItem}</Grid>
+      </div>
+    )
   };
+
 
   constructor(props: Props) {
     super(props);
@@ -66,16 +95,16 @@ class Skills extends React.Component<Props, State> {
 
   render() {
     const {skills} = this.props;
-    const skillItems = skills ? this.props.skills.map(this.skillItem) : [];
-    const editSwitch = (
-      <FormControlLabel
-        control={<Switch checked={this.state.isEditing} onChange={this.switchEdit}/>}
-        label="编辑技能"/>
-    );
+    if (!skills) return null;
+
     return (
       <div>
-        <div>{editSwitch}</div>
-        <Grid container spacing={8}>{skillItems}</Grid>
+        <div>
+          <FormControlLabel
+            control={<Switch checked={this.state.isEditing} onChange={this.switchEdit}/>}
+            label="编辑技能"/>
+        </div>
+        {skills.map(this.sections)}
       </div>
     );
   }

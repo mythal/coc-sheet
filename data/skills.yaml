@@ -1,7 +1,7 @@
 ---
 
 - label: 交际类
-  name: social
+  name: Social
   contains:
   - label: 话术
     name: Fast Talk

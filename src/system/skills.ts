@@ -15,5 +15,4 @@ export interface Skill {
   deletable?: boolean;
 }
 
-export const skillList: Array<Skill> = (safeLoad(skillData) as Array<Skill>)
-  .sort((a, b) => a.name.localeCompare(b.name));
+export const skillList: Array<Skill> = (safeLoad(skillData) as Array<Skill>);
