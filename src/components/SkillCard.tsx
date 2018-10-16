@@ -102,15 +102,13 @@ class SkillCard extends React.Component<Props, State> {
       return <SuperSkill edit={this.props.edit} skill={skill} isEditing={isEditing}/>;
     const editFields = (
       <Collapse in={isEditing}>
-        <>
-          <CardContent className={classes.Editing}>
-            <Grid container spacing={8}>
-              <Grid xs={4} item><Number margin='none' value={skill.occupation} onEdited={occupation => this.edit({occupation})} fullWidth className={classes.pointInput} label='职业'/></Grid>
-              <Grid xs={4} item><Number margin='none' value={skill.interest} onEdited={interest => this.edit({interest})} fullWidth className={classes.pointInput} label='兴趣'/></Grid>
-              <Grid xs={4} item><Number margin='none' value={skill.growth} onEdited={growth => this.edit({growth})} fullWidth className={classes.pointInput} label='成长'/></Grid>
-            </Grid>
-          </CardContent>
-        </>
+        <CardContent className={classes.Editing}>
+          <Grid container spacing={8}>
+            <Grid xs={4} item><Number margin='none' value={skill.occupation} onEdited={occupation => this.edit({occupation})} fullWidth className={classes.pointInput} label='职业'/></Grid>
+            <Grid xs={4} item><Number margin='none' value={skill.interest} onEdited={interest => this.edit({interest})} fullWidth className={classes.pointInput} label='兴趣'/></Grid>
+            <Grid xs={4} item><Number margin='none' value={skill.growth} onEdited={growth => this.edit({growth})} fullWidth className={classes.pointInput} label='成长'/></Grid>
+          </Grid>
+        </CardContent>
       </Collapse>
     );
 
@@ -122,14 +120,12 @@ class SkillCard extends React.Component<Props, State> {
     }
     else action = <IconButton className={classes.delete}><Checkbox/></IconButton>;
     return (
-      <>
-        <Grid xs={12} sm={6} md={4} lg={3} xl={2} item className={classes.root}>
-          <Card className={classes.card}>
-            <CardHeader avatar={this.avatar()} title={this.title()} subheader={name} action={action}/>
-            {editFields}
-          </Card>
-        </Grid>
-      </>
+      <Grid xs={12} sm={6} md={4} lg={3} xl={2} item className={classes.root}>
+        <Card className={classes.card}>
+          <CardHeader avatar={this.avatar()} title={this.title()} subheader={name} action={action}/>
+          {editFields}
+        </Card>
+      </Grid>
     );
   }
 }

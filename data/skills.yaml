@@ -321,31 +321,34 @@
     - irregular
 
 - label: 语言
-  name: Language (Other)
-  initial: 0
-  tag:
-  - blank
-  contains: &languages
-  - label: 汉语
-    name: Chinese
-    initial: 1
-    deletable: true
-  - label: 英语
-    name: English
-    initial: 1
-    deletable: true
-  - label: 日语
-    name: Japanese
-    initial: 1
-    deletable: true
-  - label: 拉丁语
-    name: Latin
-    initial: 1
-    deletable: true
+  name: Language
+  contains:
+  - label: 语言
+    name: Language (Other)
+    initial: 0
+    tag:
+    - blank
+    contains: &languages
+    - label: 汉语
+      name: Chinese
+      initial: 1
+      deletable: true
+    - label: 英语
+      name: English
+      initial: 1
+      deletable: true
+    - label: 日语
+      name: Japanese
+      initial: 1
+      deletable: true
+    - label: 拉丁语
+      name: Latin
+      initial: 1
+      deletable: true
 
-- label: 母语
-  name: Language (Own)
-  initial: EDU
-  tag:
-  - blank
-  contains: *languages
+  - label: 母语
+    name: Language (Own)
+    initial: EDU
+    tag:
+    - blank
+    contains: *languages

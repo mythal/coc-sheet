@@ -18,6 +18,9 @@ import { Number } from "./controls/Number";
 
 
 const styles = ({spacing}: Theme) => createStyles({
+  root: {
+    display: 'inline',
+  },
   subSkills: {
     marginTop: spacing.unit * 2,
     marginBottom: spacing.unit * 4,
@@ -120,7 +123,15 @@ class SuperSkill extends React.Component<Props, State> {
     const remove = () => {
       this.props.edit({...this.props.skill, contains: skills.filter((_, i) => i !== index)});
     };
-    return <SkillCard isEditing={this.props.isEditing} edit={edit} skill={skill} key={index} remove={remove}/>;
+    return (
+      <Slide direction='right' mountOnEnter unmountOnExit in={this.state.isExpand}>
+        <SkillCard
+          isEditing={this.props.isEditing}
+          edit={edit} skill={skill}
+          key={index} remove={remove}
+        />
+      </Slide>
+    );
   };
 
   render() {
@@ -142,15 +153,7 @@ class SuperSkill extends React.Component<Props, State> {
             { isCreating ? this.creatingCard() : this.card() }
           </Card>
         </Grid>
-
-        <Slide direction='right' mountOnEnter unmountOnExit in={this.state.isExpand}>
-          <>
-          <Grid container item spacing={8} className={this.props.classes.subSkills}>
-            {skills.map(this.skillItem)}
-          </Grid>
-          </>
-        </Slide>
-
+        {skills.map(this.skillItem)}
       </>
     );
   }
