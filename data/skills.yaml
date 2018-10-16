@@ -21,6 +21,9 @@
   - label: 信用评级
     name: Credit Rating
     initial: 0
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 移动类
   name: Movement
@@ -75,6 +78,9 @@
     initial: 1
     tag:
     - irregular
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 隐秘类
   name: Secret
@@ -94,6 +100,9 @@
   - label: 妙手
     name: Sleight of Hand
     initial: 10
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 学问类
   name: Knowledge
@@ -164,6 +173,9 @@
     - label: 数学
       name: Mathematics
       initial: 1
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 调查类
   name: Investigate
@@ -188,6 +200,9 @@
     initial: 1
     tag:
     - irregular
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 医疗类
   name: Heal
@@ -206,6 +221,9 @@
     initial: 1
     tag:
     - irregular
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 战斗类
   name: Fight
@@ -279,6 +297,9 @@
     initial: 1
     tag:
     - irregular
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 职业技能
   name: Professional
@@ -319,6 +340,9 @@
     initial: 5
     tag:
     - irregular
+  - label: 自定义
+    name: Custom
+    contains: []
 
 - label: 语言
   name: Language

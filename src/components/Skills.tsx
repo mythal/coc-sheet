@@ -43,7 +43,7 @@ class Skills extends React.Component<Props, State> {
 
   sections = (section: Skill, sectionKey: number) => {
     if (section.contains === undefined) {
-      console.log(section);
+      console.error(section);
       return null;
     }
     const {classes, skills} = this.props;
@@ -71,8 +71,10 @@ class Skills extends React.Component<Props, State> {
     };
 
 
-    const skillItem = section.contains.map((skill: Skill, key: number) => {
-      return (<SkillCard key={key} remove={remove(key)} skill={skill} edit={editSkill(key)} isEditing={this.state.isEditing}/>);
+    const skillItems = section.contains.map((skill: Skill, key: number) => {
+      return (
+        <SkillCard key={key} remove={remove(key)} skill={skill}
+                   edit={editSkill(key)}isEditing={this.state.isEditing}/>);
     });
 
     return (
@@ -80,7 +82,9 @@ class Skills extends React.Component<Props, State> {
         <div className={classes.sectionTitle}>
           <Typography  variant='subtitle1'>{section.label}</Typography>
         </div>
-        <Grid container spacing={8}>{skillItem}</Grid>
+        <Grid container spacing={8}>
+          {skillItems}
+        </Grid>
       </div>
     )
   };

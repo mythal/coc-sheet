@@ -98,7 +98,7 @@ class SkillCard extends React.Component<Props, State> {
   render() {
     const {classes, isEditing, skill} = this.props;
     const {name, contains, deletable} = this.props.skill;
-    if (contains !== undefined && contains.length > 0)
+    if (contains !== undefined)
       return <SuperSkill edit={this.props.edit} skill={skill} isEditing={isEditing}/>;
     const editFields = (
       <Collapse in={isEditing}>

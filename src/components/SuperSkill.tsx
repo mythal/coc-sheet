@@ -62,16 +62,21 @@ class SuperSkill extends React.Component<Props, State> {
 
   cancelAdd = () => this.setState({isCreating: false});
 
-  card() {
-    const {isExpand, isCreating} = this.state;
-    const {classes} = this.props;
+  cardAction() {
+    const {contains} = this.props.skill;
+    if (contains === undefined || contains.length === 0) { return null; }
+    const {isExpand} = this.state;
     const expandIcon = isExpand ? <Icon>expand_less</Icon> : <Icon>expand_more</Icon>;
-    const expandButton = (<IconButton onClick={this.handleExpand}>{expandIcon}</IconButton>);
+    return (<IconButton onClick={this.handleExpand}>{expandIcon}</IconButton>);
+  }
 
+  card() {
+    const {isCreating} = this.state;
+    const {classes} = this.props;
     const {label, name} = this.props.skill;
     return (
       <>
-        <CardHeader  title={label} subheader={name} action={expandButton} />
+        <CardHeader  title={label} subheader={name} action={this.cardAction()} />
         <Collapse in={this.props.isEditing}>
           <CardActions>
             <Button className={classes.leftAction}
@@ -124,7 +129,7 @@ class SuperSkill extends React.Component<Props, State> {
       this.props.edit({...this.props.skill, contains: skills.filter((_, i) => i !== index)});
     };
     return (
-      <Slide direction='right' mountOnEnter unmountOnExit in={this.state.isExpand}>
+      <Slide direction='right' key={index} mountOnEnter unmountOnExit in={this.state.isExpand}>
         <SkillCard
           isEditing={this.props.isEditing}
           edit={edit} skill={skill}
@@ -138,21 +143,16 @@ class SuperSkill extends React.Component<Props, State> {
     const skills = this.props.skill.contains;
     const {isCreating} = this.state;
 
-    if (skills === undefined || skills.length === 0) {
-      console.warn('SuperSkill must needs sub-skills');
-      return null;
-    }
-
-
+    if (skills === undefined) { return null; }
 
     return (
       <>
-
         <Grid xs={12} sm={6} md={4} lg={3} xl={2} item>
           <Card className={this.props.classes.card}>
             { isCreating ? this.creatingCard() : this.card() }
           </Card>
         </Grid>
+
         {skills.map(this.skillItem)}
       </>
     );
